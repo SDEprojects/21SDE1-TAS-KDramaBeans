@@ -18,7 +18,7 @@ public class RandomEvents {
         Parse randomEvents.json file to json object. Then, assigns a random event to event field.
      */
     public RandomEvents () throws Exception {
-        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("randomEvents.json"),  StandardCharsets.UTF_8);
+        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("/randomEvents.json"),  StandardCharsets.UTF_8);
         Object obj = new JSONParser().parse(file);
         JSONObject jsonObj = (JSONObject) obj;
         Random R = new Random();

@@ -27,8 +27,8 @@ public class Game {
     }};
     private boolean isGUI = false;
     /*
-        ctor
-     */
+       ctor
+    */
     public Game() throws Exception {
         this.gameStory = new Story();
         this.gamePlayer = new Player();
@@ -46,7 +46,8 @@ public class Game {
 
     //this method keeps the user in a loop -- will keep prompting them until they enter "quit"
     public void start() {
-        music.playSong();
+        // music.playSong();
+        // music.pauseSong();
         while (!enteredQuit) {
             if (enteredHelp) {
                 enteredHelp = false;
@@ -78,7 +79,7 @@ public class Game {
         System.out.println(printOptions());
         try {
             String[] input = StringUtils.split(scanner.nextLine().toLowerCase().trim(), " ", 2);
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n");
 
             switch (input[0]) {
                 case "quit":
@@ -102,7 +103,6 @@ public class Game {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: you didn't enter your move correctly");
         }
-
     }
 
 
