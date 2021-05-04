@@ -1,11 +1,12 @@
 package com.kdramabeans.game;
 
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 public class Item {
     /*
@@ -21,7 +22,7 @@ public class Item {
      */
 
     public Item() throws Exception {
-        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("items.json"),
+        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("/items.json"),
                 StandardCharsets.UTF_8);
         Object obj = new JSONParser().parse(file);
         JSONObject jsonObj = (JSONObject) obj;

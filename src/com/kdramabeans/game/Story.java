@@ -1,11 +1,11 @@
 package com.kdramabeans.game;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 public class Story {
 
@@ -30,7 +30,7 @@ public class Story {
       to be "intro" and saves the items that are in the scene into a List called "sceneItems"
      */
     public Story() throws Exception {
-        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("story.json"),
+        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("/story.json"),
                 StandardCharsets.UTF_8);
         Object obj = new JSONParser().parse(file);
         JSONObject jsonObj = (JSONObject) obj;
@@ -119,16 +119,6 @@ public class Story {
         resetOptions();
     }
 
-    // pulls from items.json and sets the options the player can choose
-    public void setOptions(String item) {
-        String key = Integer.toString(options.size() + 1);
-        Item itemObj = sceneItems.stream().filter(obj -> obj.getName().equalsIgnoreCase(item)).findAny().orElse(null);
-        if (itemObj.getOption().get("description") != null) {
-            options.put(key, itemObj.getOption());
-        }
-        sceneItems.remove(itemObj);
-    }
-
     // pulls from items list in story.json and displays choices to the player
     private void setSceneItems() {
 
@@ -153,7 +143,6 @@ public class Story {
                 e.printStackTrace();
             }
         });
-
     }
 
     //check if current scene has the item by comparing to the name of each item
@@ -223,6 +212,16 @@ public class Story {
 
     public Map<String, Map> getOptions() {
         return options;
+    }
+
+    // pulls from items.json and sets the options the player can choose
+    public void setOptions(String item) {
+        String key = Integer.toString(options.size() + 1);
+        Item itemObj = sceneItems.stream().filter(obj -> obj.getName().equalsIgnoreCase(item)).findAny().orElse(null);
+        if (itemObj.getOption().get("description") != null) {
+            options.put(key, itemObj.getOption());
+        }
+        sceneItems.remove(itemObj);
     }
 
     public String getDescription() {
