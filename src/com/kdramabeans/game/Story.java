@@ -24,7 +24,6 @@ public class Story {
     private boolean eventTrigger = false;
     private boolean isAtEnd = false;
 
-
     /*ctor
       gets story information from a .json file, makes it into a JSON object, and then saves the current scene
       to be "intro" and saves the items that are in the scene into a List called "sceneItems"
