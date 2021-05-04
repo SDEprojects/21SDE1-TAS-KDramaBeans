@@ -9,7 +9,7 @@ public class BGM {
     /*
         FIELDS
      */
-    private Clip clip;// what allows us to actually play music
+    private Clip clip; // what allows us to actually play music
 
     public BGM() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         createClip("https://kathyle.dev/songs/goblin.wav");

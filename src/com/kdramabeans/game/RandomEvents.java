@@ -22,7 +22,7 @@ public class RandomEvents {
         Object obj = new JSONParser().parse(file);
         JSONObject jsonObj = (JSONObject) obj;
         Random R = new Random();
-        String eventNumber = "event"+R.nextInt(jsonObj.size());
+        String eventNumber = "event" + R.nextInt(jsonObj.size());
         event = (JSONObject) jsonObj.get(eventNumber);
     }
 

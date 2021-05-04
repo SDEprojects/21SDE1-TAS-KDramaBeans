@@ -1,24 +1,20 @@
 package com.kdramabeans.game;
 
-import java.io.File;
-import java.util.Scanner;
-import java.util.*;
-
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.*;
+
 public class Game {
-    /*
-        fields
-     */
-    private Scanner scanner = new Scanner(System.in);
     public Player gamePlayer = null;
     public Story gameStory = null;
-    private Item item = new Item();
-    private BGM music = new BGM();
     boolean enteredQuit = false;
     boolean enteredHelp = false;
+
+    private Scanner scanner = new Scanner(System.in);
+    private Item item = new Item();
+    private BGM music = new BGM();
     private List<String> eventItems = Arrays.asList("wallet", "watch", "business card");
-    private Map<String, String> evidenceMap = new HashMap<>(){{
+    private Map<String, String> evidenceMap = new HashMap<>() {{
         put("watch", "evidence 1");
         put("business card", "evidence 2");
         put("rose", "evidence 3");
@@ -26,9 +22,8 @@ public class Game {
         put("voice recorder", "evidence 5");
     }};
     private boolean isGUI = false;
-    /*
-       ctor
-    */
+
+    // constructors
     public Game() throws Exception {
         this.gameStory = new Story();
         this.gamePlayer = new Player();
@@ -40,14 +35,9 @@ public class Game {
         this.isGUI = isGUI;
     }
 
-    /*
-        methods/functions
-     */
-
     //this method keeps the user in a loop -- will keep prompting them until they enter "quit"
     public void start() {
         // music.playSong();
-        // music.pauseSong();
         while (!enteredQuit) {
             if (enteredHelp) {
                 enteredHelp = false;
@@ -57,15 +47,21 @@ public class Game {
                     gamePlayer.clearEvidence();
                     gameStory.setRestart(false);
                 }
-                System.out.println(gameStory.printStory());
-                System.out.println(gamePlayer.printGrabbedItems());
-                System.out.println(gamePlayer.printEvidence());
-                System.out.println(gameStory.printItems());
+                showInfo();
             }
-            if(hasEventItem()){
+            if (hasEventItem()) {
                 gameStory.setEventTrigger(true);
             }
             promptUser();
+        }
+    }
+
+    public void showInfo() {
+        String[] output = {
+                gameStory.printStory(), gamePlayer.printGrabbedItems(),
+                gamePlayer.printEvidence(), gameStory.printItems()};
+        for (int i = 0; i < output.length; i++) {
+            System.out.println(output[i]);
         }
     }
 
@@ -98,13 +94,12 @@ public class Game {
                     enteredHelp = true;
                     break;
                 default:
-                    System.out.println(executeCommand(input, false));;
+                    System.out.println(executeCommand(input, false));
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: you didn't enter your move correctly");
         }
     }
-
 
     // function that reads user's input and executes based on command
     public String executeCommand(String[] input, boolean isGUI) {
@@ -122,7 +117,7 @@ public class Game {
                     if (gamePlayer.grabItem(input[1])) {
                         gameStory.setOptions(input[1]);
                         return "You have grabbed " + input[1];
-                    }else{
+                    } else {
                         return "You have too many items! Try dropping one if you really need to grab " + input[1];
                     }
                 } else {
@@ -137,15 +132,15 @@ public class Game {
 //                    }
                     return "You chose option : " + input[1];
                 } else {
-                   return "Not an option\n";
+                    return "Not an option\n";
                 }
             case "use":
                 String evidence = evidenceMap.get(input[1]);
                 System.out.println(evidence);
-                if (gamePlayer.hasGrabbedItem(input[1]) && gameStory.hasHidden(evidence)){
+                if (gamePlayer.hasGrabbedItem(input[1]) && gameStory.hasHidden(evidence)) {
                     gamePlayer.addEvidence(evidence);
                     return "You have used : " + input[1] + ", and you collected : " + evidence;
-                } else{
+                } else {
                     return "You don't have this item in your inventory or your item does not work here";
                 }
             default:
@@ -153,7 +148,7 @@ public class Game {
         }
     }
 
-    public String printOptions(){
+    public String printOptions() {
         if (gamePlayer.getGrabbedItems().size() > 0) {
             return gameStory.printOptions();
         }
