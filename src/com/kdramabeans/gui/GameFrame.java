@@ -305,7 +305,7 @@ public class GameFrame {
                 add(() -> Result[0] = player.dropItem(input[1]));
             }};
             try{
-                InputStream in = getClass().getResourceAsStream("/resources/validVerbs.csv");
+                InputStream in = getClass().getResourceAsStream("/validVerbs.csv");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 final int[] counter = {0};
                 reader.lines().forEachOrdered(synonyms -> {
