@@ -128,7 +128,7 @@ public class Game {
                     gameStory.setCurrentOption(input[1]);
                     gameStory.nextScene(isGUI);
 //                    if (gameStory.isAtEnd()) {
-//                        music.changeSong(new File("resources/sad.wav").toURI().toString());
+//                        music.changeSong(new File("data/sad.wav").toURI().toString());
 //                    }
                     return "You chose option : " + input[1];
                 } else {
