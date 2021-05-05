@@ -129,7 +129,6 @@ public class Story {
                 e.printStackTrace();
             }
         });
-
     }
 
     private void setHiddenItems() {
@@ -238,7 +237,6 @@ public class Story {
     public void setRestart(boolean restart) {
         isRestart = restart;
     }
-
 
     public void setEventTrigger(boolean eventTrigger) {
         this.eventTrigger = eventTrigger;
