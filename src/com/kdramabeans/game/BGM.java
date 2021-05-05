@@ -12,7 +12,14 @@ public class BGM {
     private Clip clip; // what allows us to actually play music
 
     public BGM() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        createClip("https://kathyle.dev/songs/goblin.wav");
+        Thread musicThread = new Thread(() -> {
+            try {
+                createClip("https://kathyle.dev/songs/goblin.wav");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        });
+        musicThread.start();
     }
 
     public void playSong() {
