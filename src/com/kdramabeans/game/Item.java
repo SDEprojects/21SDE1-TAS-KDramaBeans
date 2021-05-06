@@ -31,10 +31,9 @@ public class Item {
 
     public Item(String item) throws Exception {
         this();
-        JSONObject itemObj = (JSONObject) data.get(item);
         this.name = item;
-        this.description = (String) itemObj.get("description");
-        setOption(itemObj);
+        this.description = dp.getItemDescription(item);
+        setOption(item);
     }
 
     /*
@@ -51,6 +50,7 @@ public class Item {
     /*
       GETTERS/SETTER
      */
+    DataParser dp = new DataParser();
     public String getName() {
         return name;
     }
@@ -59,7 +59,8 @@ public class Item {
         return option;
     }
 
-    private void setOption(JSONObject itemObj) {
-        this.option = (Map) itemObj.get("option");
+    public void setOption(String itemObj) {
+        //this.option = (Map) itemObj.get("option");
+        this.option = dp.getItemOption(itemObj);
     }
 }

@@ -32,5 +32,4 @@ public class RandomEvents {
     public JSONObject getEvent() {
         return event;
     }
-
 }
