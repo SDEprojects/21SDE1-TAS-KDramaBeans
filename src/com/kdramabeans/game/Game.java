@@ -60,7 +60,7 @@ public class Game {
         // Panel Title (can be used to place all the text and scenario we want to use)
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.white);
-        titleNameLabel = new JLabel("Welcome to KDramaBeans Game!");
+        titleNameLabel = new JLabel("You are my Destiny!");
         titleNameLabel.setForeground(Color.black);
         titleNameLabel.setFont(titleFont);
 
@@ -118,7 +118,7 @@ public class Game {
         statusArea.setForeground(Color.black);
         statusArea.setFont(normalFont);
         statusArea.setLineWrap(true);
-        statusArea.setText("These are your commands:\n" +
+        statusArea.setText("Commands:\n" +
                 "EXAMINE [Item] - to get the item description.\n" +
                 "GRAB [Item] - to add item to your inventory.\n" +
                 "DROP [Item] - to drop item from your inventory.\n" +

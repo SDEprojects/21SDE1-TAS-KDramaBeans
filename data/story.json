@@ -1,6 +1,6 @@
 {
   "intro": {
-    "description": "This story is about a man seeking revenge for the murder of his father. Your name is Park Ji Woo and you have become a successful entrepreneur in the states. You come back to South Korea under the alias of Daniel Park and your goal is to destroy X Company.",
+    "description": "You will play as Park Ji Woo, a successful entrepreneur in the states. You return to South Korea under the alias of Daniel Park and your goal is to destroy Company X, whom is believed to had a hand in your father's death as a young kid.",
     "ending": false,
     "items": ["passport", "wallet", "luggage"],
     "hidden": []
@@ -24,7 +24,7 @@
     "hidden": ["evidence 2"]
   },
   "scene4": {
-    "description": "You have done your research about X Company, and gathered leads on how to take the company down. You fly to Korea with the alias of Daniel Park.",
+    "description": "You have done your research on Company X, and gathered leads on how to take the company down. You fly to Korea with the alias of Daniel Park.",
     "ending": false,
     "items": ["coffee", "tea", "beer"],
     "hidden": []
@@ -72,7 +72,7 @@
     "hidden": []
   },
   "mournScene": {
-    "description": "Your perform your father's funeral. Few guests arrive, but nobody from Company X gives their condolences.",
+    "description": "You perform your father's funeral. Very few guests arrive, but nobody from Company X gives their condolences.",
     "ending": true,
     "items": [],
     "hidden": []
