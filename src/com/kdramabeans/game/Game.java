@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Game {
     private Player player = new Player();
     private Story story = new Story();
-    private Item item = new Item();
+    private DataParser item;
     private BGM music = new BGM();
     private Map<String, String> evidenceMap = new HashMap<>() {{
         put("watch", "evidence 1");
@@ -43,6 +43,7 @@ public class Game {
       ctor that initializes the home page of the game
      */
     public Game() throws Exception {
+        item = new DataParser();
         window = new JFrame();
         titleNamePanel = new JPanel();
         buttonPanel = new JPanel();
@@ -171,7 +172,6 @@ public class Game {
         nextButton.setFont(normalFont);
         nextButton.addActionListener(textHandler);
         buttonPanel.add(nextButton);
-
     }
 
     public void generalButtons() {
@@ -192,7 +192,6 @@ public class Game {
         restartButton.addActionListener(textHandler);
         container.add(generalButtonPanel);
     }
-
 
     public class TextFieldHandler implements KeyListener, ActionListener {
 
@@ -304,7 +303,7 @@ public class Game {
                 add(() -> Result[0] = player.dropItem(input[1]));
             }};
             try {
-                InputStream in = getClass().getResourceAsStream("/resources/validVerbs.csv");
+                InputStream in = getClass().getResourceAsStream("/validVerbs.csv");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 final int[] counter = {0};
                 reader.lines().forEachOrdered(synonyms -> {
