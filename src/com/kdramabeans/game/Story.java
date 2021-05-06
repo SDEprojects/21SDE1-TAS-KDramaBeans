@@ -1,5 +1,6 @@
 package com.kdramabeans.game;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -54,7 +55,7 @@ public class Story {
 
     // sets the scene, it will check if the scene ends the game or not and display the description
     private void setScene(boolean isGUI) {
-        JSONObject newOption = (JSONObject) options.get(currentOption);
+        Map newOption = options.get(currentOption);
         String nextScene = (String) newOption.get("nextScene");
         JSONObject currentScene = (JSONObject) data.get(nextScene);
         if ((boolean) currentScene.get("ending")) {
@@ -185,12 +186,15 @@ public class Story {
     // iterates over story.json and depending on the item picked, will give you certain options
     public String printOptions() {
         String result = "";
+        System.out.println(options);
         if (options.size() > 0) {
+            System.out.println(options);
             Iterator<Map.Entry<String, Map>> itr1 = options.entrySet().iterator();
             result += "\nHere are your options: ";
             while (itr1.hasNext()) {
                 Map.Entry<String, Map> pair = itr1.next();
-                JSONObject msg = (JSONObject) pair.getValue();
+                //JSONObject msg = (JSONObject) pair.getValue();
+                Map msg = pair.getValue();
                 result += ("\n" + pair.getKey() + " : " + msg.get("description"));
             }
         }
