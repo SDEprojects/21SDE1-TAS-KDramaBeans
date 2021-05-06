@@ -16,7 +16,6 @@ public class Story {
     private Map<String, Map> options = new HashMap<>();
     private String currentOption;
     private List<Item> sceneItems = new ArrayList<>();
-    // private List<DataParser> sceneItems = new ArrayList<>();
     private List<String> hiddenItems = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
     private JSONObject randomEvent = new RandomEvents().getEvent();
@@ -215,7 +214,6 @@ public class Story {
 
     // pulls from items.json and sets the options the player can choose
     public void setOptions(String item) {
-        // if getItemNames have item --> getItemOption(itemName) else let item doesnt exist
         String key = Integer.toString(options.size() + 1);
         Item itemObj = sceneItems.stream().filter(obj -> obj.getName().equalsIgnoreCase(item)).findAny().orElse(null);
         if (itemObj.getOption().get("description") != null) {

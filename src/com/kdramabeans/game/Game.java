@@ -261,7 +261,7 @@ public class Game {
     private void playGame() {
         try {
             String[] input = StringUtils.split(mainTextField.getText().toLowerCase().trim(), " ", 2);
-            System.out.println("THIS IS THE INPUT" + mainTextField.getText());
+            System.out.println("THIS IS THE INPUT " + mainTextField.getText());
             for (String s : input) {
                 System.out.println(s);
             }
