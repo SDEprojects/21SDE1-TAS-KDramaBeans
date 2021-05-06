@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class DataParser {
 
@@ -21,6 +22,7 @@ public class DataParser {
 
     private ObjectMapper mapper;
     private JsonNode root;
+    private JsonNode event;
 
     DataParser() {
         try {
@@ -49,4 +51,11 @@ public class DataParser {
         return result;
     }
 
+    public JsonNode getRandomEvents() {
+        int randEventSize = root.path(RANDOMEVENTS_NODE).size();
+        Random rand = new Random();
+        String eventNumber = "event" + rand.nextInt(randEventSize);
+        event = root.path(RANDOMEVENTS_NODE).path(eventNumber);
+        return event;
+    }
 }
