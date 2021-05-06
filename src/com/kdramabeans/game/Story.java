@@ -147,9 +147,9 @@ public class Story {
         boolean result = false;
         for (int index = 0; index < sceneItems.size(); index++) {
             // return sceneItems.contains(itemName);
-//            if (sceneItems.get(index).getName().equalsIgnoreCase(itemName)) {
-//                result = true;
-//            }
+            if (sceneItems.get(index).getName().equalsIgnoreCase(itemName)) {
+                result = true;
+            }
         }
         return result;
     }

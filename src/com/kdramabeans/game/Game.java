@@ -254,14 +254,14 @@ public class Game {
 
     private String printStatus() {
         String status = "";
-        status += (story.printStory() + "\n" + player.printGrabbedItems() + "\n" + player.printEvidence() + "\n" + story.printItems() + "\n" + story.printOptions());
+        status += (story.printStory() + "\n" + player.printGrabbedItems() + "\n" + player.printEvidence() + "\n" + story.printItems() + "\n" + story.printOptions()); //+ game.printOptions()
         return status;
     }
 
     private void playGame() {
         try {
             String[] input = StringUtils.split(mainTextField.getText().toLowerCase().trim(), " ", 2);
-            System.out.println("THIS IS THE INPUT " + mainTextField.getText());
+            System.out.println("THIS IS THE INPUT: " + mainTextField.getText());
             for (String s : input) {
                 System.out.println(s);
             }
@@ -286,7 +286,6 @@ public class Game {
                             Result[0] = "You have too many items! Try dropping one if you really need to grab " + input[1];
                         }
                     } else {
-
                         Result[0] = "You cannot grab that.\n";
                     }
                 });
