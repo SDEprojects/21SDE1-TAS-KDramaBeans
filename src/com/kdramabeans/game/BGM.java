@@ -9,10 +9,17 @@ public class BGM {
     /*
         FIELDS
      */
-    private Clip clip;// what allows us to actually play music
+    private Clip clip; // what allows us to actually play music
 
     public BGM() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        createClip("https://kathyle.dev/songs/goblin.wav");
+        Thread musicThread = new Thread(() -> {
+            try {
+                createClip("https://kathyle.dev/songs/goblin.wav");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        });
+        musicThread.start();
     }
 
     public void playSong() {
@@ -20,19 +27,19 @@ public class BGM {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void pauseSong(){
+    public void pauseSong() {
         clip.stop();
     }
 
-    public boolean isPlaying(){
+    public boolean isPlaying() {
         return clip.isRunning();
     }
 
-    public void changeSong(String url){
+    public void changeSong(String url) {
         pauseSong();
-        try{
+        try {
             createClip(url);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -48,5 +55,4 @@ public class BGM {
         //AudioSystem.getAudioInputStream(this.getClass().getResource("NameOfFile.wav"));
         return AudioSystem.getAudioInputStream(songURL);
     }
-
 }

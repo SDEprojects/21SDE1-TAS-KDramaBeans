@@ -1,0 +1,92 @@
+{
+  "intro": {
+    "description": "You will play as Park Ji Woo, a successful entrepreneur in the states. You return to South Korea under the alias of Daniel Park and your goal is to destroy Company X, whom is believed to had a hand in your father's death as a young kid.",
+    "ending": false,
+    "items": ["passport", "wallet", "luggage"],
+    "hidden": []
+  },
+  "scene1": {
+    "description": "Park Ji Woo's father, Park Ji Sung is driving his boss, Lee Jin Wook to work. He is suddenly asked to pull over as his boss receives an urgent phone call. His boss looks frantic.",
+    "ending": false,
+    "items": ["voice recorder", "phone", "sun glasses"],
+    "hidden": []
+  },
+  "scene2": {
+    "description": "The next day, your father leaves work to pick you up from school. Another car crashed into your dad's car, right in the front of the school gate. You come out of school only to find your dad is dead, and no other vehicle in sight. The only thing left besides your dad's body is his favorite watch and a picture of you two. Today, you became an orphan, you have no other family members.",
+    "ending": false,
+    "items": ["watch", "will", "picture"],
+    "hidden": ["evidence 1"]
+  },
+  "scene3": {
+    "description": "You have been adopted by an American family and moved to New York. You attend and graduate at the top of your class from Yale University. You go on to become a successful entrepreneur and are famous all throughout the world. Little do people know, your only goal in life is to get back at the person who murdered your father.",
+    "ending": false,
+    "items": ["ticket", "business card"],
+    "hidden": ["evidence 2"]
+  },
+  "scene4": {
+    "description": "You have done your research on Company X, and gathered leads on how to take the company down. You fly to Korea with the alias of Daniel Park.",
+    "ending": false,
+    "items": ["coffee", "tea", "beer"],
+    "hidden": []
+  },
+  "scene5": {
+    "description": "You meet the daughter, Lee Ji Eun. She is caught off guard by your elegance and immediately starts a conversation with you.",
+    "ending": false,
+    "items": ["window seat", "the booth"],
+    "hidden": ["evidence 3"]
+  },
+  "scene6": {
+    "description": "You meet the CEO of Company X, and inform him your company would like to help promote the sales of RDX-90 in the United States.",
+    "ending": false,
+    "items": ["green tea", "solomon's tea"],
+    "hidden": ["evidence 5"]
+  },
+  "scene7": {
+    "description": "You meet a board member of Company X, and he was quite happy about RDX-90 possibly going on sale in the United States",
+    "ending": false,
+    "items": ["ipa", "truly"],
+    "hidden": ["evidence 4"]
+  },
+  "scene8": {
+    "description": "You've collected enough information about the safety concerns of RDX-90 along with the plagiarized clinical trials. You meet an American reporter in a cafe shop to transfer all the information you have on Company X. As soon as you are about to give the report, Lee Ji Eun, who has been tailing you, interrupts your conversation.",
+    "ending": false,
+    "items": ["kimchi", "soju"],
+    "hidden": []
+  },
+  "result1": {
+    "description": "Congratulations, you have reached your goal of life! You take down the company, you reveal your identity to Chairman Lee who is shocked that you have come this far. He asks for forgiveness and for you to spare his life. He is sentenced to 15 years in jail for corruption and murder for your father's death.",
+    "ending": true,
+    "items": [],
+    "hidden": []
+  },
+  "result2": {
+    "description": "You develop feelings for Lee Ji Eun and your relationship takes off. You reveal your identity to her and she accepts you for who you are and what you have been through. You still reveal the corrupt deeds of Company X and the Chairman goes to jail. You take over as the CEO and reform the company and it becomes a global brand after the successful promotion of RDX-90.",
+    "ending": true,
+    "items": [],
+    "hidden": []
+  },
+  "candyCrush": {
+    "description": "You ran out of time and couldn't beat level 100. You open the window a little bit to take out your frustration. The chairman being frantic feels like you were eavesdropping and gets suspicious.",
+    "ending": true,
+    "items": [],
+    "hidden": []
+  },
+  "mournScene": {
+    "description": "You perform your father's funeral. Very few guests arrive, but nobody from Company X gives their condolences.",
+    "ending": true,
+    "items": [],
+    "hidden": []
+  },
+  "olympicScene": {
+    "description": "Korea takes 1st place in all competitions! All the males are exempt from their military service.",
+    "ending": true,
+    "items": [],
+    "hidden": []
+  },
+  "ceoScene": {
+    "description": "You notice a lot of the information presented doesn't make any sense. You see that this document can be a liability to the company and its RDX-90 product promotion.",
+    "ending": true,
+    "items": [],
+    "hidden": []
+  }
+}

@@ -15,9 +15,11 @@ public class Player {
      CTOR
      */
     // to instantiate player w default max inventory of 3
-    public Player(){}
+    public Player() {
+    }
+
     //to instantiate player w a customized max inventory
-    public Player(int max_inventory){
+    public Player(int max_inventory) {
         this.max_inventory = max_inventory;
     }
 
@@ -28,12 +30,11 @@ public class Player {
     //adds an item to the Player's inventory only if they have not reached max capacity
     public boolean grabItem(String item) {
         boolean canGrab = false;
-        if(grabbedItems.size() < max_inventory){
+        if (grabbedItems.size() < max_inventory) {
             System.out.println("You have grabbed: " + item + "\n");
             grabbedItems.add(item);
             canGrab = true;
-        }
-        else{
+        } else {
             System.out.println("You have too many items! Try dropping one if you really need to grab " + item);
         }
         return canGrab;
@@ -44,11 +45,11 @@ public class Player {
     }
 
     //deletes an item from user's inventory, if it's there
-    public String dropItem(String item){
-        if(hasGrabbedItem(item)){
+    public String dropItem(String item) {
+        if (hasGrabbedItem(item)) {
             grabbedItems.remove(item);
             return "You have dropped: " + item;
-        }else{
+        } else {
             return "You don't have one to drop.";
         }
     }
