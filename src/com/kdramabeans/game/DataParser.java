@@ -18,6 +18,7 @@ public class DataParser {
     static String RANDOMEVENTS_NODE = "randomEvents";
     static String DESCRIPTION_NODE = "description";
     static String ITEM_OPTION = "option";
+    static String HIDDEN_NODE = "hidden";
 
     private ObjectMapper mapper;
     private JsonNode root;
@@ -48,6 +49,15 @@ public class DataParser {
         List<String> result = new ArrayList<>();
         JsonNode arrNode = scene.path(ITEMS_NODE);
         for (JsonNode objNode : arrNode) {
+            result.add(objNode.asText());
+        }
+        return result;
+    }
+
+    public List<String> getSceneHidden(JsonNode scene) {
+        List<String> result = new ArrayList<>();
+        JsonNode arrNode = scene.path(HIDDEN_NODE);
+        for(JsonNode objNode : arrNode) {
             result.add(objNode.asText());
         }
         return result;

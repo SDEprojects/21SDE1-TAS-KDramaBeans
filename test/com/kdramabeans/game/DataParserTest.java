@@ -40,6 +40,11 @@ public class DataParserTest {
     }
 
     @Test
+    public void getSceneHiddenTest() {
+        System.out.println(dp.getSceneHidden(scene));
+    }
+
+    @Test
     public void randomEventsTest() {
         System.out.println(dp.getRandomEvents());
     }
