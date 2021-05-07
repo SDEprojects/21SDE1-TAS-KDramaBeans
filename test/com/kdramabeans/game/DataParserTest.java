@@ -1,19 +1,15 @@
 package com.kdramabeans.game;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import org.json.simple.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
 public class DataParserTest {
 
     DataParser dp;
-    JSONObject randomEvent;
 
     @Before
     public void setUp() throws Exception {
         dp = new DataParser();
-        randomEvent = new RandomEvents().getEvent();
     }
 
     @Test
@@ -37,7 +33,7 @@ public class DataParserTest {
     }
 
     @Test
-    public void getRandTest() {
-        System.out.println(randomEvent);
+    public void getStoryIntro() {
+        System.out.println(dp.getStoryIntro());
     }
 }

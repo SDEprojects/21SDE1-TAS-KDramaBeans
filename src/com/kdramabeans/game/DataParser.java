@@ -58,4 +58,12 @@ public class DataParser {
         event = root.path(RANDOMEVENTS_NODE).path(eventNumber);
         return event;
     }
+
+    public JsonNode getStoryIntro() {
+        return root.path(STORY_NODE).path("intro");
+    }
+
+    public JsonNode getStory() {
+        return root.path(STORY_NODE);
+    }
 }

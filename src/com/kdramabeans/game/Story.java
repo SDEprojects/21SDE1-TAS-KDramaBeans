@@ -1,6 +1,7 @@
 package com.kdramabeans.game;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -12,14 +13,17 @@ public class Story {
     /*
         fields
      */
-    private JSONObject data;
-    private JSONObject scene;
+    //private JSONObject data;
+    private JsonNode data;
+    private JsonNode scene;
+    private DataParser dp;
     private Map<String, Map> options = new HashMap<>();
     private String currentOption;
     private List<Item> sceneItems = new ArrayList<>();
     private List<String> hiddenItems = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
-    private JSONObject randomEvent = new RandomEvents().getEvent();
+    // private JSONObject randomEvent = new RandomEvents().getEvent();
+    private JsonNode randomEvent = new DataParser().getRandomEvents();
     private boolean isRestart = false;
     private boolean eventTrigger = false;
     private boolean isAtEnd = false;
@@ -29,13 +33,14 @@ public class Story {
       to be "intro" and saves the items that are in the scene into a List called "sceneItems"
      */
     public Story() throws Exception {
-        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("/story.json"),
-                StandardCharsets.UTF_8);
-        Object obj = new JSONParser().parse(file);
-        JSONObject jsonObj = (JSONObject) obj;
-        this.data = jsonObj;
+//        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("/story.json"),
+//                StandardCharsets.UTF_8);
+//        Object obj = new JSONParser().parse(file);
+//        JSONObject jsonObj = (JSONObject) obj;
+        dp = new DataParser();
+        this.data = dp.getStory();
         //set "intro" as starting scene
-        this.scene = (JSONObject) jsonObj.get("intro");
+        this.scene = dp.getStoryIntro();
         setSceneItems();
     }
 
@@ -57,8 +62,9 @@ public class Story {
     private void setScene(boolean isGUI) {
         Map newOption = options.get(currentOption);
         String nextScene = (String) newOption.get("nextScene");
-        JSONObject currentScene = (JSONObject) data.get(nextScene);
-        if ((boolean) currentScene.get("ending")) {
+        // JSONObject currentScene = (JSONObject) data.get(nextScene);
+        JsonNode currentScene = data.get(nextScene);
+        if (currentScene.get("ending").asBoolean()) {
             isAtEnd = true;
             if (isGUI) {
                 runGUIEnding(currentScene);
@@ -72,15 +78,15 @@ public class Story {
         }
     }
 
-    private void runGUIEnding(JSONObject currentScene) {
+    private void runGUIEnding(JsonNode currentScene) {
         String ending = "\nThis is the end of the game, if you want to start again, click the restart button.";
-        currentScene.put("description", currentScene.get("description") + ending);
+        ((ObjectNode)currentScene).put("description", currentScene.get("description") + ending);
         this.scene = currentScene;
     }
 
     //if the user has hit a "dead end" they have the option to restart the game
-    private void runEndingScene(JSONObject currentScene) {
-        String msg = (String) currentScene.get("description");
+    private void runEndingScene(JsonNode currentScene) {
+        String msg = currentScene.get("description").asText();
         System.out.println(msg);
         System.out.println("Do you want to play again? ");
         boolean isRightResponse = false;
@@ -98,7 +104,7 @@ public class Story {
     }
 
     //this will set either a "random" scene or user's choice of scene
-    private void randomOrNextScene(JSONObject currentScene) {
+    private void randomOrNextScene(JsonNode currentScene) {
         Random rand = new Random();
         int n = rand.nextInt(10);
         if (n <= 2) {
@@ -110,7 +116,7 @@ public class Story {
 
     // restarts the game - resets scene back to intro and clears all options and items
     public void restartGame() {
-        this.scene = (JSONObject) data.get("intro");
+        this.scene = (JsonNode) data.get("intro");
         sceneItems.clear();
         setSceneItems();
         hiddenItems.clear();
@@ -227,11 +233,11 @@ public class Story {
     }
 
     public String getDescription() {
-        return (String) scene.get("description");
+        return scene.get("description").asText();
     }
 
     public boolean getEnding() {
-        return (boolean) scene.get("ending");
+        return scene.get("ending").asBoolean();
     }
 
     public boolean isRestart() {
