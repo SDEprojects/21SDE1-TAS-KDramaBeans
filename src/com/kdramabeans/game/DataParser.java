@@ -3,14 +3,13 @@ package com.kdramabeans.game;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class DataParser {
 
@@ -42,6 +41,15 @@ public class DataParser {
     public List<String> getItemNames() {
         List<String> result = new ArrayList<>();
         root.path(ITEMS_NODE).fieldNames().forEachRemaining(result::add);
+        return result;
+    }
+
+    public List<String> getSceneItems(JsonNode scene) {
+        List<String> result = new ArrayList<>();
+        JsonNode arrNode = scene.path(ITEMS_NODE);
+        for (JsonNode objNode : arrNode) {
+            result.add(objNode.asText());
+        }
         return result;
     }
 
