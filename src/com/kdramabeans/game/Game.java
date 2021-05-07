@@ -254,7 +254,7 @@ public class Game {
 
     private String printStatus() {
         String status = "";
-        status += (story.printStory() + "\n" + player.printGrabbedItems() + "\n" + player.printEvidence() + "\n" + story.printItems() + "\n" + story.printOptions()); //+ game.printOptions()
+        status += (story.printStory() + "\n" + player.printGrabbedItems() + "\n" + player.printEvidence() + "\n" + story.printItems() + "\n" + story.printOptions());
         return status;
     }
 

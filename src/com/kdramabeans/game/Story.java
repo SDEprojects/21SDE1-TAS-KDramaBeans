@@ -2,27 +2,19 @@ package com.kdramabeans.game;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class Story {
-    /*
-        fields
-     */
     //private JSONObject data;
     private JsonNode data;
     private JsonNode scene;
     private DataParser dp;
     private Map<String, Map> options = new HashMap<>();
     private String currentOption;
-    private List<Item> sceneItems = new ArrayList<>();
+    private List<String> sceneItems = new ArrayList<>();
     private List<String> hiddenItems = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
-    // private JSONObject randomEvent = new RandomEvents().getEvent();
     private JsonNode randomEvent = new DataParser().getRandomEvents();
     private boolean isRestart = false;
     private boolean eventTrigger = false;
@@ -33,13 +25,8 @@ public class Story {
       to be "intro" and saves the items that are in the scene into a List called "sceneItems"
      */
     public Story() throws Exception {
-//        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("/story.json"),
-//                StandardCharsets.UTF_8);
-//        Object obj = new JSONParser().parse(file);
-//        JSONObject jsonObj = (JSONObject) obj;
         dp = new DataParser();
         this.data = dp.getStory();
-        //set "intro" as starting scene
         this.scene = dp.getStoryIntro();
         setSceneItems();
     }
@@ -62,7 +49,6 @@ public class Story {
     private void setScene(boolean isGUI) {
         Map newOption = options.get(currentOption);
         String nextScene = (String) newOption.get("nextScene");
-        // JSONObject currentScene = (JSONObject) data.get(nextScene);
         JsonNode currentScene = data.get(nextScene);
         if (currentScene.get("ending").asBoolean()) {
             isAtEnd = true;
@@ -80,7 +66,7 @@ public class Story {
 
     private void runGUIEnding(JsonNode currentScene) {
         String ending = "\nThis is the end of the game, if you want to start again, click the restart button.";
-        ((ObjectNode)currentScene).put("description", currentScene.get("description") + ending);
+        ((ObjectNode) currentScene).put("description", currentScene.get("description") + ending);
         this.scene = currentScene;
     }
 
@@ -126,11 +112,10 @@ public class Story {
 
     // pulls from items list in story.json and displays choices to the player
     private void setSceneItems() {
-
-        List items = (List) scene.get("items");
+        List<String> items = dp.getSceneItems(scene);
         items.forEach(item -> {
             try {
-                sceneItems.add(new Item(item.toString()));
+                sceneItems.add(item);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -138,7 +123,6 @@ public class Story {
     }
 
     private void setHiddenItems() {
-
         List items = (List) scene.get("hidden");
         items.forEach(item -> {
             try {
@@ -154,7 +138,7 @@ public class Story {
         boolean result = false;
         for (int index = 0; index < sceneItems.size(); index++) {
             // return sceneItems.contains(itemName);
-            if (sceneItems.get(index).getName().equalsIgnoreCase(itemName)) {
+            if (sceneItems.get(index).equalsIgnoreCase(itemName)) {
                 result = true;
             }
         }
@@ -178,7 +162,7 @@ public class Story {
         if (!getEnding()) {
             result += "\nHere are the items you see: ";
             for (int index = 0; index < sceneItems.size(); index++) {
-                result += ("\n" + sceneItems.get(index).getName());
+                result += ("\n" + sceneItems.get(index));
             }
         }
         return result;
@@ -199,7 +183,6 @@ public class Story {
             result += "\nHere are your options: ";
             while (itr1.hasNext()) {
                 Map.Entry<String, Map> pair = itr1.next();
-                //JSONObject msg = (JSONObject) pair.getValue();
                 Map msg = pair.getValue();
                 result += ("\n" + pair.getKey() + " : " + msg.get("description"));
             }
@@ -225,11 +208,16 @@ public class Story {
     // pulls from items.json and sets the options the player can choose
     public void setOptions(String item) {
         String key = Integer.toString(options.size() + 1);
-        Item itemObj = sceneItems.stream().filter(obj -> obj.getName().equalsIgnoreCase(item)).findAny().orElse(null);
-        if (itemObj.getOption().get("description") != null) {
-            options.put(key, itemObj.getOption());
+
+        if(sceneItems.contains(item.toLowerCase()) && dp.getItemOption(item) != null) {
+            options.put(key, dp.getItemOption(item));
         }
-        sceneItems.remove(itemObj);
+        sceneItems.remove(item);
+//        String itemObj = sceneItems.stream().filter(obj -> obj.equalsIgnoreCase(item)).findAny().orElse(null);
+//        if (dp.getItemDescription(itemObj) != null) {
+//            options.put(key, dp.getItemOption(itemObj));
+//        }
+//        sceneItems.remove(itemObj);
     }
 
     public String getDescription() {
