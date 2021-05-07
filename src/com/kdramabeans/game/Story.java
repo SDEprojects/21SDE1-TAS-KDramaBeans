@@ -123,10 +123,10 @@ public class Story {
     }
 
     private void setHiddenItems() {
-        List items = (List) scene.get("hidden");
+        List<String> items = dp.getSceneHidden(scene);
         items.forEach(item -> {
             try {
-                hiddenItems.add(item.toString());
+                hiddenItems.add(item);
             } catch (Exception e) {
                 e.printStackTrace();
             }
