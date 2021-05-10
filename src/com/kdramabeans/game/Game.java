@@ -306,7 +306,7 @@ public class Game {
                         story.nextScene(true);
                         Result[0] = "You chose option: " + input[1];
                     } else {
-                        Result[0] = "Not a command\n";
+                        Result[0] = "Use: [choose,go,fly,teleport,move] [number]\n";
                     }
                 });
             }};
@@ -325,14 +325,6 @@ public class Game {
                 System.out.println(except);
             }
             allActions.getOrDefault(input[0], () -> {
-//                int answer = story.getOptions().values().stream().map(obj -> obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim()) + 1;
-//                if (answer != 0) {
-//                    story.setCurrentOption("" + answer);
-//                    story.nextScene(true);
-//                    Result[0] = "";
-//                } else {
-//                    Result[0] = "Not a command\n";
-//                }
             }).run();
             statusArea.setText(Result[0]);
 

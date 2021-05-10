@@ -213,11 +213,6 @@ public class Story {
             options.put(key, dp.getItemOption(item));
         }
         sceneItems.remove(item);
-//        String itemObj = sceneItems.stream().filter(obj -> obj.equalsIgnoreCase(item)).findAny().orElse(null);
-//        if (dp.getItemDescription(itemObj) != null) {
-//            options.put(key, dp.getItemOption(itemObj));
-//        }
-//        sceneItems.remove(itemObj);
     }
 
     public String getDescription() {
