@@ -305,8 +305,9 @@ public class Game {
                         story.setCurrentOption(input[1]);
                         story.nextScene(true);
                         Result[0] = "You chose option: " + input[1];
+                    } else {
+                        Result[0] = "Not a command\n";
                     }
-                    Result[0] = "Not a command\n";
                 });
             }};
             try {
