@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Game {
     private Player player = new Player();
     private Story story = new Story();
-    private Item item = new Item();
+    private DataParser item;
     private BGM music = new BGM();
     private Map<String, String> evidenceMap = new HashMap<>() {{
         put("watch", "evidence 1");
@@ -43,6 +43,7 @@ public class Game {
       ctor that initializes the home page of the game
      */
     public Game() throws Exception {
+        item = new DataParser();
         window = new JFrame();
         titleNamePanel = new JPanel();
         buttonPanel = new JPanel();
@@ -171,7 +172,6 @@ public class Game {
         nextButton.setFont(normalFont);
         nextButton.addActionListener(textHandler);
         buttonPanel.add(nextButton);
-
     }
 
     public void generalButtons() {
@@ -192,7 +192,6 @@ public class Game {
         restartButton.addActionListener(textHandler);
         container.add(generalButtonPanel);
     }
-
 
     public class TextFieldHandler implements KeyListener, ActionListener {
 
@@ -262,7 +261,7 @@ public class Game {
     private void playGame() {
         try {
             String[] input = StringUtils.split(mainTextField.getText().toLowerCase().trim(), " ", 2);
-            System.out.println("THIS IS THE INPUT" + mainTextField.getText());
+            System.out.println("THIS IS THE INPUT: " + mainTextField.getText());
             for (String s : input) {
                 System.out.println(s);
             }
@@ -287,7 +286,6 @@ public class Game {
                             Result[0] = "You have too many items! Try dropping one if you really need to grab " + input[1];
                         }
                     } else {
-
                         Result[0] = "You cannot grab that.\n";
                     }
                 });
@@ -302,6 +300,15 @@ public class Game {
                     }
                 });
                 add(() -> Result[0] = player.dropItem(input[1]));
+                add(() -> {
+                    if(story.getOptions().containsKey(input[1])) {
+                        story.setCurrentOption(input[1]);
+                        story.nextScene(true);
+                        Result[0] = "You chose option: " + input[1];
+                    } else {
+                        Result[0] = "Not a command\n";
+                    }
+                });
             }};
             try {
                 InputStream in = getClass().getResourceAsStream("/validVerbs.csv");
@@ -318,14 +325,14 @@ public class Game {
                 System.out.println(except);
             }
             allActions.getOrDefault(input[0], () -> {
-                int answer = story.getOptions().values().stream().map(obj -> obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim()) + 1;
-                if (answer != 0) {
-                    story.setCurrentOption("" + answer);
-                    story.nextScene(true);
-                    Result[0] = "";
-                } else {
-                    Result[0] = "Not a command\n";
-                }
+//                int answer = story.getOptions().values().stream().map(obj -> obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim()) + 1;
+//                if (answer != 0) {
+//                    story.setCurrentOption("" + answer);
+//                    story.nextScene(true);
+//                    Result[0] = "";
+//                } else {
+//                    Result[0] = "Not a command\n";
+//                }
             }).run();
             statusArea.setText(Result[0]);
 
