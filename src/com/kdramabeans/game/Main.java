@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         try {
-            new Game();
+            new Gui();
         } catch (Exception e) {
             System.out.println(e);
         }
