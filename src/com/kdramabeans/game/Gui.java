@@ -14,7 +14,6 @@ import static com.kdramabeans.game.Game.music;
 
 public class Gui {
 
-
     private JFrame window;
     private JPanel titleNamePanel, buttonPanel, mainTextPanel, generalButtonPanel;
     private JLabel titleNameLabel, lblGif;
@@ -106,7 +105,7 @@ public class Gui {
         statusArea.setForeground(Color.black);
         statusArea.setFont(normalFont);
         statusArea.setLineWrap(true);
-        statusArea.setText("Commands:\n" +
+        statusArea.setText("Commands:\n\n" +
                 "[examine,look,see,view] [Item] - to get the item description.\n" +
                 "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
                 "[drop,remove] [Item] - to drop item from your inventory.\n" +
@@ -217,7 +216,7 @@ public class Gui {
                     mainTextArea.setText(printStatus());
                     statusArea.setText("");
                 });
-                put(helpButton, () -> statusArea.setText("These are your commands:\n" +
+                put(helpButton, () -> statusArea.setText("These are your commands:\n\n" +
                         "[examine,look,see,view] [Item] - to get the item description.\n" +
                         "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
                         "[drop,remove] [Item] - to drop item from your inventory.\n" +
