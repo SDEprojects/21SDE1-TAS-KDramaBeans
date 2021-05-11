@@ -89,7 +89,7 @@ public class Game {
                         story.nextScene(true);
                         Result[0] = "You chose option: " + input[1];
                     } else {
-                        Result[0] = "Use: [choose,go,fly,teleport,move] [number]\n";
+                        Result[0] = "Use: [choose,go,move,select] [number]\n";
                     }
                 });
             }};
