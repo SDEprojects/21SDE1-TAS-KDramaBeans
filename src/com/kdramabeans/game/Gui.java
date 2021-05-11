@@ -107,10 +107,11 @@ public class Gui {
         statusArea.setFont(normalFont);
         statusArea.setLineWrap(true);
         statusArea.setText("Commands:\n" +
-                "EXAMINE [Item] - to get the item description.\n" +
-                "GRAB [Item] - to add item to your inventory.\n" +
-                "DROP [Item] - to drop item from your inventory.\n" +
-                "USE [Item] - to use item in a scene.\n");
+                "[examine,look,see,view] [Item] - to get the item description.\n" +
+                "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
+                "[drop,remove] [Item] - to drop item from your inventory.\n" +
+                "[use,throw] [Item] - to use item in a scene.\n" +
+                "[choose,go,move,select] [Option] - to go to next scene.\n");
 
         //set up userPrompt label
         userPrompt = new JTextArea();
@@ -143,7 +144,7 @@ public class Gui {
         lblGif = new JLabel();
 
         try {
-            Icon imgGif = new ImageIcon(getClass().getResource("resources/images/random.jpg"));
+            Icon imgGif = new ImageIcon(getClass().getResource("images/random.jpg"));
             lblGif.setIcon(imgGif);
         } catch (NullPointerException e) {
             System.out.println("Can't Find Image");
@@ -217,10 +218,11 @@ public class Gui {
                     statusArea.setText("");
                 });
                 put(helpButton, () -> statusArea.setText("These are your commands:\n" +
-                        "EXAMINE [Item] - to get the item description.\n" +
-                        "GRAB [Item] - to add item to your inventory.\n" +
-                        "DROP [Item] - to drop item from your inventory.\n" +
-                        "USE [Item] - to use item in a scene.\n"));
+                        "[examine,look,see,view] [Item] - to get the item description.\n" +
+                        "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
+                        "[drop,remove] [Item] - to drop item from your inventory.\n" +
+                        "[use,throw] [Item] - to use item in a scene.\n" +
+                        "[choose,go,move,select] [Option] - to go to next scene.\n"));
                 put(startButton, () -> {
                     startButton.getParent().remove(startButton);
                     createGameScreen();
