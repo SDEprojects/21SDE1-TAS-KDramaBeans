@@ -70,20 +70,4 @@ public class Player {
     public void clearItems() {
         grabbedItems.clear();
     }
-
-    //clears evidence in evidence list
-    public void clearEvidence() {
-        evidenceList.clear();
-    }
-
-    /*
-      GETTER
-     */
-    public List<String> getGrabbedItems() {
-        return grabbedItems;
-    }
-
-    public List<String> getEvidenceList() {
-        return evidenceList;
-    }
 }

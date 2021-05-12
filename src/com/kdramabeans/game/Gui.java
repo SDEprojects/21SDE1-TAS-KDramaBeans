@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,12 +21,13 @@ public class Gui {
     private JPanel titleNamePanel, buttonPanel, mainTextPanel, generalButtonPanel;
     private JLabel titleNameLabel, gifLabel, sceneLabel;
     private JButton startButton, nextButton, enterButton, restartButton, quitButton, helpButton, musicButton;
-    public static JTextArea mainTextArea, statusArea, userPrompt, inventoryArea;
+    public static JTextArea mainTextArea, statusArea, inventoryArea;
     public static JTextField mainTextField;
     private Container container;
     private static final Font titleFont = new Font("Times New Roman", Font.BOLD, 30);
     private static final Font normalFont = new Font("Times New Roman", Font.PLAIN, 15);
     private TextFieldHandler textHandler = new TextFieldHandler();
+    public static final Color SKY_ICE = new Color(206, 231, 243);
 
     /*
       ctor that initializes the home page of the game
@@ -41,7 +41,7 @@ public class Gui {
         // JFrame setup
         window.setSize(800, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.WHITE);
+        window.getContentPane().setBackground(SKY_ICE);
         window.setLayout(null);
         window.setResizable(false);
         window.setTitle("KDramaBeans Game");
@@ -49,11 +49,10 @@ public class Gui {
 
         // Panel Title (can be used to place all the text and scenario we want to use)
         titleNamePanel.setBounds(100, 100, 600, 150);
-        titleNamePanel.setBackground(Color.white);
+        titleNamePanel.setBackground(SKY_ICE);
         titleNameLabel = new JLabel("You are my Destiny!");
         titleNameLabel.setForeground(Color.black);
         titleNameLabel.setFont(titleFont);
-
 
         try {
             Icon imgGif = new ImageIcon(getClass().getResource("/koreanair.gif"));
@@ -66,10 +65,10 @@ public class Gui {
 
         // start button setup - should link to the start of the game
         buttonPanel.setBounds(300, 500, 200, 100);
-        buttonPanel.setBackground(Color.white);
+        buttonPanel.setBackground(SKY_ICE);
         Image startImage = findImage("startButton.png", 200, 75);
         startButton = new JButton(new ImageIcon(startImage));
-        startButton.setBackground(Color.white);
+        startButton.setBackground(Color.WHITE);
         startButton.setForeground(Color.black);
         startButton.setFont(normalFont);
         startButton.setBorderPainted(false);
@@ -146,7 +145,7 @@ public class Gui {
         // set up textField for userInput
         mainTextField = new JTextField();
         mainTextField.setText("");
-        mainTextField.setBounds(100, 700, 450, 75);
+        mainTextField.setBounds(100, 700, 450, 60);
         mainTextField.setBackground(Color.white);
         mainTextField.setForeground(Color.black);
         mainTextField.setFont(normalFont);
@@ -203,7 +202,7 @@ public class Gui {
         container.add(generalButtonPanel);
     }
 
-    public class TextFieldHandler implements KeyListener, ActionListener {
+    class TextFieldHandler implements KeyListener, ActionListener {
 
         // restart, quit, help, enter(click)
         @Override

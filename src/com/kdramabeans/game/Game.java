@@ -2,7 +2,6 @@ package com.kdramabeans.game;
 
 import org.apache.commons.lang3.StringUtils;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
