@@ -2,16 +2,8 @@ package com.kdramabeans.game;
 
 import org.apache.commons.lang3.StringUtils;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -37,7 +29,7 @@ public class Game {
 
     public static String printStatus() {
         String status = "";
-        status += (story.printStory() + "\n" + player.printGrabbedItems() + "\n" + player.printEvidence() + "\n" + story.printItems() + "\n" + story.printOptions());
+        status += (story.printStory() + "\n" + story.printItems() + "\n" + story.printOptions());
         return status;
     }
 
@@ -108,10 +100,19 @@ public class Game {
                 System.out.println(except);
             }
             allActions.getOrDefault(input[0], () -> {
+                int answer = story.getOptions().values().stream().map(obj->obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim())+1;
+                if (answer!=0) {
+                    story.setCurrentOption(""+answer);
+                    story.nextScene(true);
+                    Result[0] =  "";
+                } else {
+                    Result[0] = "Not a command\n";
+                }
+
             }).run();
             statusArea.setText(Result[0]);
-
             mainTextArea.setText(printStatus());
+            inventoryArea.setText(player.printGrabbedItems()+"\n"+player.printEvidence());
             mainTextField.setText("");
         } catch (ArrayIndexOutOfBoundsException exception) {
             statusArea.setText("Error: you didn't enter your move correctly");
@@ -121,18 +122,6 @@ public class Game {
         try {
             story = new Story();
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    static {
-        try {
-            music = new BGM();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
     }

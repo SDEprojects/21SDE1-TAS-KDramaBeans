@@ -129,7 +129,7 @@
     "watch": {
       "description": "You find an odd microchip taped on the backside of the watch",
       "option": {
-        "description": "Examine your dad's favorite watch",
+        "description": "Inspect your dad's favorite watch",
         "nextScene": "scene3"
       }
     },
@@ -154,7 +154,7 @@
     "business card": {
       "description": "It's for a Private Investigator",
       "option": {
-        "description": "Hire a private investigator to find more information about your father's case",
+        "description": "Hire a private investigator",
         "nextScene": "scene4"
       }
     },
@@ -168,28 +168,28 @@
     "tea": {
       "description": "Your cup is low. Maybe go grab some more?",
       "option": {
-        "description": "Meet with the CEO to talk about a possible investment in Company X",
+        "description": "Meet with the CEO",
         "nextScene": "scene6"
       }
     },
     "beer": {
       "description": "Your cup is low. Maybe go grab some more?",
       "option": {
-        "description": "Talk to Company X's board members to inquire more about their shares",
+        "description": "Talk to Company X's board members",
         "nextScene": "scene7"
       }
     },
     "window seat": {
       "description": "The weather is nice today.",
       "option": {
-        "description": "Have a long conversation over a cup of coffee and get to know each other more",
+        "description": "Have a long conversation over a cup of coffee",
         "nextScene": "scene8"
       }
     },
     "the booth": {
       "description": "Nice and cozy here.",
       "option": {
-        "description": "Inquire more about RDX-90. She seems to trust you and spills the beans",
+        "description": "Inquire more about RDX-90",
         "nextScene": "scene8"
       }
     },

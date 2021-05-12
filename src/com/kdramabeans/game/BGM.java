@@ -4,55 +4,59 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 
-
-public class BGM {
+public class BGM extends Thread{
     /*
         FIELDS
      */
-    private Clip clip; // what allows us to actually play music
+    public Clip clip;
+    public String song; // .wav files
 
-    public BGM() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        Thread musicThread = new Thread(() -> {
-            try {
-                createClip("https://kathyle.dev/songs/goblin.wav");
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        });
-        musicThread.start();
+
+    public BGM(String song) {
+        this.song = song;
+        this.start();
+//     //========URL MUSIC PLAYER======//
+//        Thread musicThread = new Thread(() -> {
+//            try {
+//                createClip("https://kathyle.dev/songs/goblin.wav");
+//            }catch(Exception e){
+//                System.out.println("Bad Url: "+e);
+//            }
+//        });
+//        musicThread.start();
+    }
+    public BGM(String song,boolean isMusic) {
+        this(song);
+        if(isMusic){
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+    }
+
+    public void run() {
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(createAudioStream(song));
+            clip.start();
+        } catch (Exception e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void playSong() {
         clip.start();
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void pauseSong() {
+    public void pauseSong(){
         clip.stop();
+        this.interrupt();
     }
 
-    public boolean isPlaying() {
+    public boolean isPlaying(){
         return clip.isRunning();
     }
-
-    public void changeSong(String url) {
-        pauseSong();
-        try {
-            createClip(url);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void createClip(String url) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        clip = AudioSystem.getClip();
-        clip.open(createAudioStream(url));
-    }
-
     //Helper Methods
-    private AudioInputStream createAudioStream(String url) throws IOException, UnsupportedAudioFileException {
-        URL songURL = new URL(url);
-        //AudioSystem.getAudioInputStream(this.getClass().getResource("NameOfFile.wav"));
-        return AudioSystem.getAudioInputStream(songURL);
+    private AudioInputStream createAudioStream(String song) throws IOException, UnsupportedAudioFileException {
+        URL url = BGM.class.getResource("/" + song);
+        return AudioSystem.getAudioInputStream(url);
     }
 }
