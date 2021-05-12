@@ -55,19 +55,19 @@ public class Gui {
         titleNameLabel.setFont(titleFont);
 
 
-        try{
+        try {
             Icon imgGif = new ImageIcon(getClass().getResource("/koreanair.gif"));
             gifLabel = new JLabel(imgGif);
             gifLabel.setBounds(7, 170, 800, 200);
             container.add(gifLabel);
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Can't Find Image");
         }
 
         // start button setup - should link to the start of the game
         buttonPanel.setBounds(300, 500, 200, 100);
         buttonPanel.setBackground(Color.white);
-        Image startImage = findImage("startButton.png",200,75);
+        Image startImage = findImage("startButton.png", 200, 75);
         startButton = new JButton(new ImageIcon(startImage));
         startButton.setBackground(Color.white);
         startButton.setForeground(Color.black);
@@ -96,32 +96,32 @@ public class Gui {
         mainTextPanel.setBackground(Color.white);
 
         //sets up scene image
-        try{
+        try {
             Icon scenePng = new ImageIcon(getClass().getResource("/random.jpg"));
             sceneLabel = new JLabel(scenePng);
             sceneLabel.setBorder(new LineBorder(Color.black));
             sceneLabel.setBounds(0, 50, 800, 200);
-            container.add(sceneLabel,SwingConstants.CENTER);
-        }catch(Exception e){
+            container.add(sceneLabel, SwingConstants.CENTER);
+        } catch (Exception e) {
             System.out.println("Can't Find Image");
         }
 
         // sets up the textArea
         mainTextArea = new JTextArea(printStatus());
-        mainTextArea.setBounds(100,250, 600, 250);
+        mainTextArea.setBounds(100, 250, 600, 250);
         mainTextArea.setBackground(Color.white);
         mainTextArea.setForeground(Color.black);
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
 
         //sets up inventory area
-        inventoryArea = new JTextArea(player.printGrabbedItems()+"\n"+player.printEvidence());
-        inventoryArea.setBounds(100,650,600,50);
+        inventoryArea = new JTextArea(player.printGrabbedItems() + "\n" + player.printEvidence());
+        inventoryArea.setBounds(100, 650, 600, 50);
         inventoryArea.setBackground(Color.white);
         inventoryArea.setForeground(Color.black);
         inventoryArea.setEditable(false);
         // sets up enter button
-        Image enterImage = findImage("enterButton.png",100,50);
+        Image enterImage = findImage("enterButton.png", 100, 50);
         enterButton = new JButton(new ImageIcon(enterImage));
         enterButton.setBorderPainted(false);
         buttonPanel.setBounds(550, 700, 150, 75);
@@ -141,13 +141,7 @@ public class Gui {
         statusArea.setForeground(Color.black);
         statusArea.setFont(normalFont);
         statusArea.setLineWrap(true);
-        statusArea.setText("Commands:\n\n" +
-                "[examine,look,see,view] [Item] - to get the item description.\n" +
-                "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
-                "[drop,remove] [Item] - to drop item from your inventory.\n" +
-                "[use,throw] [Item] - to use item in a scene.\n" +
-                "[choose,go,move,select] [Option] - to go to next scene.\n");
-
+        statusArea.setText("Commands:\n\n" + showHelp());
 
         // set up textField for userInput
         mainTextField = new JTextField();
@@ -167,61 +161,33 @@ public class Gui {
     }
 
 
-
-    public Image findImage(String path,int width, int height){
+    public Image findImage(String path, int width, int height) {
         Image foundImage = null;
-        try{
-            foundImage = ImageIO.read(new File(this.getClass().getResource("/"+path).toURI())).getScaledInstance(width,height,Image.SCALE_SMOOTH);
-        }catch(Exception e){
-            System.out.println("Can't find Image: "+path);
+        try {
+            foundImage = ImageIO.read(new File(this.getClass().getResource("/" + path).toURI())).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        } catch (Exception e) {
+            System.out.println("Can't find Image: " + path);
             e.printStackTrace();
         }
         return foundImage;
     }
 
-//
-//    public void displayGif() {
-//        titleNamePanel.setVisible(false);
-//
-//        lblGif = new JLabel();
-//
-//        try {
-//            Icon imgGif = new ImageIcon(getClass().getResource("images/random.jpg"));
-//            lblGif.setIcon(imgGif);
-//        } catch (NullPointerException e) {
-//            System.out.println("Can't Find Image");
-//        }
-//
-//        lblGif.setBounds(150, 150, 455, 170);
-//        container.add(lblGif);
-//
-//        //button
-//        nextButton = new JButton("Next");
-//        nextButton.setBackground(Color.white);
-//        nextButton.setForeground(Color.black);
-//        nextButton.setFont(normalFont);
-//        nextButton.addActionListener(textHandler);
-//        buttonPanel.add(nextButton);
-//    }
-
     public void generalButtons() {
         generalButtonPanel = new JPanel();
 
-        Image quitImage = findImage("xButton.png",50,50);
+        Image quitImage = findImage("xButton.png", 50, 50);
         quitButton = new JButton(new ImageIcon(quitImage));
         quitButton.setBorderPainted(false);
 
-        Image restartImage = findImage("restart.png",50,50);
+        Image restartImage = findImage("restart.png", 50, 50);
         restartButton = new JButton(new ImageIcon(restartImage));
         restartButton.setBorderPainted(false);
 
-        Image helpImage = findImage("infoButton.png",50,50);
+        Image helpImage = findImage("infoButton.png", 50, 50);
         helpButton = new JButton(new ImageIcon(helpImage));
         helpButton.setBorderPainted(false);
 
-
-
-        Image musicImage = findImage("sound.png",50,50);
+        Image musicImage = findImage("sound.png", 50, 50);
         musicButton = new JButton(new ImageIcon(musicImage));
         musicButton.setBorderPainted(false);
 
@@ -240,7 +206,6 @@ public class Gui {
     public class TextFieldHandler implements KeyListener, ActionListener {
 
         // restart, quit, help, enter(click)
-
         @Override
         public void keyTyped(KeyEvent e) {
             keyPressed(e);
@@ -273,12 +238,7 @@ public class Gui {
                     inventoryArea.setText("Inventory is Empty!");
                     statusArea.setText("");
                 });
-                put(helpButton, () -> statusArea.setText("These are your commands:\n\n" +
-                        "[examine,look,see,view] [Item] - to get the item description.\n" +
-                        "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
-                        "[drop,remove] [Item] - to drop item from your inventory.\n" +
-                        "[use,throw] [Item] - to use item in a scene.\n" +
-                        "[choose,go,move,select] [Option] - to go to next scene.\n"));
+                put(helpButton, () -> statusArea.setText("These are your commands:\n\n" + showHelp()));
                 put(startButton, () -> {
                     startButton.getParent().remove(startButton);
                     createGameScreen();
@@ -295,5 +255,13 @@ public class Gui {
             }};
             allActions.getOrDefault(e.getSource(), () -> System.out.println("You have not selected a button.")).run();
         }
+    }
+
+    private String showHelp() {
+        return "[examine,look,see,view] [Item] - to get the item description.\n" +
+                "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
+                "[drop,remove] [Item] - to drop item from your inventory.\n" +
+                "[use,throw] [Item] - to use item in a scene.\n" +
+                "[choose,go,move,select] [Option] - to go to next scene.\n";
     }
 }

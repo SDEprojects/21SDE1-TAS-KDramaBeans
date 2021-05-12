@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    /*
-      FIELDS
-     */
+
     private List<String> grabbedItems = new ArrayList<>(); //player's inventory
     private List<String> evidenceList = new ArrayList<>();
     private int max_inventory = 3; // default is 3

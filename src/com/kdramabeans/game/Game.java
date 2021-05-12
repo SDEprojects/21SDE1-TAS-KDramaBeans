@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import static com.kdramabeans.game.Gui.*;
 
 public class Game {
+
     public static Player player = new Player();
     public static Story story;
     public static DataParser item;
@@ -76,7 +77,7 @@ public class Game {
                 });
                 add(() -> Result[0] = player.dropItem(input[1]));
                 add(() -> {
-                    if(story.getOptions().containsKey(input[1])) {
+                    if (story.getOptions().containsKey(input[1])) {
                         story.setCurrentOption(input[1]);
                         story.nextScene(true);
                         Result[0] = "You chose option: " + input[1];
@@ -100,11 +101,11 @@ public class Game {
                 System.out.println(except);
             }
             allActions.getOrDefault(input[0], () -> {
-                int answer = story.getOptions().values().stream().map(obj->obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim())+1;
-                if (answer!=0) {
-                    story.setCurrentOption(""+answer);
+                int answer = story.getOptions().values().stream().map(obj -> obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim()) + 1;
+                if (answer != 0) {
+                    story.setCurrentOption("" + answer);
                     story.nextScene(true);
-                    Result[0] =  "";
+                    Result[0] = "";
                 } else {
                     Result[0] = "Not a command\n";
                 }
@@ -112,12 +113,13 @@ public class Game {
             }).run();
             statusArea.setText(Result[0]);
             mainTextArea.setText(printStatus());
-            inventoryArea.setText(player.printGrabbedItems()+"\n"+player.printEvidence());
+            inventoryArea.setText(player.printGrabbedItems() + "\n" + player.printEvidence());
             mainTextField.setText("");
         } catch (ArrayIndexOutOfBoundsException exception) {
             statusArea.setText("Error: you didn't enter your move correctly");
         }
     }
+
     static {
         try {
             story = new Story();
