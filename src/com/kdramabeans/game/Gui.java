@@ -1,11 +1,15 @@
 package com.kdramabeans.game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,9 +20,9 @@ public class Gui {
 
     private JFrame window;
     private JPanel titleNamePanel, buttonPanel, mainTextPanel, generalButtonPanel;
-    private JLabel titleNameLabel, lblGif;
+    private JLabel titleNameLabel, gifLabel, sceneLabel;
     private JButton startButton, nextButton, enterButton, restartButton, quitButton, helpButton, musicButton;
-    public static JTextArea mainTextArea, statusArea, userPrompt;
+    public static JTextArea mainTextArea, statusArea, userPrompt, inventoryArea;
     public static JTextField mainTextField;
     private Container container;
     private static final Font titleFont = new Font("Times New Roman", Font.BOLD, 30);
@@ -33,7 +37,6 @@ public class Gui {
         window = new JFrame();
         titleNamePanel = new JPanel();
         buttonPanel = new JPanel();
-        startButton = new JButton("Start");
 
         // JFrame setup
         window.setSize(800, 800);
@@ -51,12 +54,25 @@ public class Gui {
         titleNameLabel.setForeground(Color.black);
         titleNameLabel.setFont(titleFont);
 
+
+        try{
+            Icon imgGif = new ImageIcon(getClass().getResource("/koreanair.gif"));
+            gifLabel = new JLabel(imgGif);
+            gifLabel.setBounds(7, 170, 800, 200);
+            container.add(gifLabel);
+        }catch(NullPointerException e){
+            System.out.println("Can't Find Image");
+        }
+
         // start button setup - should link to the start of the game
-        buttonPanel.setBounds(300, 400, 200, 100);
+        buttonPanel.setBounds(300, 500, 200, 100);
         buttonPanel.setBackground(Color.white);
+        Image startImage = findImage("startButton.png",200,75);
+        startButton = new JButton(new ImageIcon(startImage));
         startButton.setBackground(Color.white);
         startButton.setForeground(Color.black);
         startButton.setFont(normalFont);
+        startButton.setBorderPainted(false);
         startButton.addActionListener(textHandler);
 
         // calls up all the components and makes the screen visible
@@ -68,6 +84,7 @@ public class Gui {
     }
 
     public void createGameScreen() {
+        container.remove(gifLabel);
         // disables to home page panel and will display panel below
         buttonPanel.setVisible(false);
 
@@ -75,20 +92,39 @@ public class Gui {
 
         // sets up the panel
         mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(100, 50, 600, 450);
+        mainTextPanel.setBounds(100, 250, 600, 350);
         mainTextPanel.setBackground(Color.white);
+
+        //sets up scene image
+        try{
+            Icon scenePng = new ImageIcon(getClass().getResource("/random.jpg"));
+            sceneLabel = new JLabel(scenePng);
+            sceneLabel.setBorder(new LineBorder(Color.black));
+            sceneLabel.setBounds(0, 50, 800, 200);
+            container.add(sceneLabel,SwingConstants.CENTER);
+        }catch(Exception e){
+            System.out.println("Can't Find Image");
+        }
 
         // sets up the textArea
         mainTextArea = new JTextArea(printStatus());
-        mainTextArea.setBounds(100, 50, 600, 450);
+        mainTextArea.setBounds(100,250, 600, 250);
         mainTextArea.setBackground(Color.white);
         mainTextArea.setForeground(Color.black);
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
 
-        // enter button
-        enterButton = new JButton("Enter");
-        buttonPanel.setBounds(550, 537, 150, 50);
+        //sets up inventory area
+        inventoryArea = new JTextArea(player.printGrabbedItems()+"\n"+player.printEvidence());
+        inventoryArea.setBounds(100,650,600,50);
+        inventoryArea.setBackground(Color.white);
+        inventoryArea.setForeground(Color.black);
+        inventoryArea.setEditable(false);
+        // sets up enter button
+        Image enterImage = findImage("enterButton.png",100,50);
+        enterButton = new JButton(new ImageIcon(enterImage));
+        enterButton.setBorderPainted(false);
+        buttonPanel.setBounds(550, 700, 150, 75);
         enterButton.setBackground(Color.white);
         enterButton.setForeground(Color.black);
         enterButton.setFont(normalFont);
@@ -100,7 +136,7 @@ public class Gui {
 
         // sets up the statusArea
         statusArea = new JTextArea();
-        statusArea.setBounds(100, 350, 600, 300);
+        statusArea.setBounds(100, 600, 600, 300);
         statusArea.setBackground(Color.white);
         statusArea.setForeground(Color.black);
         statusArea.setFont(normalFont);
@@ -112,18 +148,11 @@ public class Gui {
                 "[use,throw] [Item] - to use item in a scene.\n" +
                 "[choose,go,move,select] [Option] - to go to next scene.\n");
 
-        //set up userPrompt label
-        userPrompt = new JTextArea();
-        userPrompt.setText("Type your command here:");
-        userPrompt.setBounds(100, 500, 450, 25);
-        userPrompt.setBackground(Color.white);
-        userPrompt.setForeground(Color.black);
-        userPrompt.setFont(normalFont);
 
         // set up textField for userInput
         mainTextField = new JTextField();
         mainTextField.setText("");
-        mainTextField.setBounds(100, 525, 450, 75);
+        mainTextField.setBounds(100, 700, 450, 75);
         mainTextField.setBackground(Color.white);
         mainTextField.setForeground(Color.black);
         mainTextField.setFont(normalFont);
@@ -131,48 +160,76 @@ public class Gui {
 
         mainTextPanel.add(mainTextArea);
         mainTextPanel.add(statusArea);
-        container.add(userPrompt);
         container.add(mainTextField);
         container.add(mainTextPanel);
+        container.add(inventoryArea);
         buttonPanel.setVisible(true);
     }
 
-    public void displayGif() {
-        titleNamePanel.setVisible(false);
 
-        lblGif = new JLabel();
 
-        try {
-            Icon imgGif = new ImageIcon(getClass().getResource("images/random.jpg"));
-            lblGif.setIcon(imgGif);
-        } catch (NullPointerException e) {
-            System.out.println("Can't Find Image");
+    public Image findImage(String path,int width, int height){
+        Image foundImage = null;
+        try{
+            foundImage = ImageIO.read(new File(this.getClass().getResource("/"+path).toURI())).getScaledInstance(width,height,Image.SCALE_SMOOTH);
+        }catch(Exception e){
+            System.out.println("Can't find Image: "+path);
+            e.printStackTrace();
         }
-
-        lblGif.setBounds(150, 150, 455, 170);
-        container.add(lblGif);
-
-        //button
-        nextButton = new JButton("Next");
-        nextButton.setBackground(Color.white);
-        nextButton.setForeground(Color.black);
-        nextButton.setFont(normalFont);
-        nextButton.addActionListener(textHandler);
-        buttonPanel.add(nextButton);
+        return foundImage;
     }
+
+//
+//    public void displayGif() {
+//        titleNamePanel.setVisible(false);
+//
+//        lblGif = new JLabel();
+//
+//        try {
+//            Icon imgGif = new ImageIcon(getClass().getResource("images/random.jpg"));
+//            lblGif.setIcon(imgGif);
+//        } catch (NullPointerException e) {
+//            System.out.println("Can't Find Image");
+//        }
+//
+//        lblGif.setBounds(150, 150, 455, 170);
+//        container.add(lblGif);
+//
+//        //button
+//        nextButton = new JButton("Next");
+//        nextButton.setBackground(Color.white);
+//        nextButton.setForeground(Color.black);
+//        nextButton.setFont(normalFont);
+//        nextButton.addActionListener(textHandler);
+//        buttonPanel.add(nextButton);
+//    }
 
     public void generalButtons() {
         generalButtonPanel = new JPanel();
-        quitButton = new JButton("Quit");
-        restartButton = new JButton("Restart");
-        helpButton = new JButton("Help");
-        musicButton = new JButton("Play/Pause");
 
-        generalButtonPanel.setBounds(100, 600, 600, 100);
-        generalButtonPanel.add(musicButton);
-        generalButtonPanel.add(quitButton);
-        generalButtonPanel.add(helpButton);
+        Image quitImage = findImage("xButton.png",50,50);
+        quitButton = new JButton(new ImageIcon(quitImage));
+        quitButton.setBorderPainted(false);
+
+        Image restartImage = findImage("restart.png",50,50);
+        restartButton = new JButton(new ImageIcon(restartImage));
+        restartButton.setBorderPainted(false);
+
+        Image helpImage = findImage("infoButton.png",50,50);
+        helpButton = new JButton(new ImageIcon(helpImage));
+        helpButton.setBorderPainted(false);
+
+
+
+        Image musicImage = findImage("sound.png",50,50);
+        musicButton = new JButton(new ImageIcon(musicImage));
+        musicButton.setBorderPainted(false);
+
+        generalButtonPanel.setBounds(0, -10, 1300, 60);
         generalButtonPanel.add(restartButton);
+        generalButtonPanel.add(musicButton);
+        generalButtonPanel.add(helpButton);
+        generalButtonPanel.add(quitButton);
         musicButton.addActionListener(textHandler);
         quitButton.addActionListener(textHandler);
         helpButton.addActionListener(textHandler);
@@ -204,16 +261,16 @@ public class Gui {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("Quit")) {
-                System.exit(0);
-            }
             Map<Object, Runnable> allActions = new HashMap<>() {{
-                put(enterButton, () -> playGame());
+                put(enterButton, Game::playGame);
+                put(quitButton, () -> System.exit(0));
                 put(restartButton, () -> {
                     System.out.println("Restarting...");
                     story.restartGame();
                     player.clearItems();
+
                     mainTextArea.setText(printStatus());
+                    inventoryArea.setText("Inventory is Empty!");
                     statusArea.setText("");
                 });
                 put(helpButton, () -> statusArea.setText("These are your commands:\n\n" +
@@ -225,7 +282,7 @@ public class Gui {
                 put(startButton, () -> {
                     startButton.getParent().remove(startButton);
                     createGameScreen();
-                    music.playSong();
+                    music = new BGM("goblin.wav");
                 });
                 put(musicButton, () -> {
                     if (music.isPlaying()) {
@@ -234,7 +291,7 @@ public class Gui {
                         music.playSong();
                     }
                 });
-                put(nextButton, () -> createGameScreen());
+                put(nextButton, Gui.this::createGameScreen);
             }};
             allActions.getOrDefault(e.getSource(), () -> System.out.println("You have not selected a button.")).run();
         }
