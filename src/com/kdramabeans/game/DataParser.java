@@ -55,7 +55,7 @@ public class DataParser {
     public List<String> getSceneHidden(JsonNode scene) {
         List<String> result = new ArrayList<>();
         JsonNode arrNode = scene.path(HIDDEN_NODE);
-        for(JsonNode objNode : arrNode) {
+        for (JsonNode objNode : arrNode) {
             result.add(objNode.asText());
         }
         return result;
@@ -63,7 +63,8 @@ public class DataParser {
 
     public Map getItemOption(String itemName) {
         JsonNode jsonNode = root.path(ITEMS_NODE).path(itemName).path(ITEM_OPTION);
-        Map<String, Object> result = mapper.convertValue(jsonNode, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> result = mapper.convertValue(jsonNode, new TypeReference<Map<String, Object>>() {
+        });
         return result;
     }
 

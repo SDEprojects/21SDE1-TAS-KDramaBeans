@@ -209,7 +209,7 @@ public class Story {
     public void setOptions(String item) {
         String key = Integer.toString(options.size() + 1);
 
-        if(sceneItems.contains(item.toLowerCase()) && !dp.getItemOption(item).isEmpty()) {
+        if (sceneItems.contains(item.toLowerCase()) && !dp.getItemOption(item).isEmpty()) {
             options.put(key, dp.getItemOption(item));
         }
         sceneItems.remove(item);
