@@ -31,10 +31,6 @@ public class Story {
         setSceneItems();
     }
 
-    /*
-        methods/functions
-     */
-
     //brings user to the next scene by resetting the scene, the items in the scene, and clearing their options
     public void nextScene(boolean isGUI) {
         setScene(isGUI);
@@ -221,21 +217,5 @@ public class Story {
 
     public boolean getEnding() {
         return scene.get("ending").asBoolean();
-    }
-
-    public boolean isRestart() {
-        return isRestart;
-    }
-
-    public void setRestart(boolean restart) {
-        isRestart = restart;
-    }
-
-    public void setEventTrigger(boolean eventTrigger) {
-        this.eventTrigger = eventTrigger;
-    }
-
-    public boolean isAtEnd() {
-        return isAtEnd;
     }
 }
