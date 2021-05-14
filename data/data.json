@@ -1,7 +1,7 @@
 {
   "story": {
     "intro": {
-      "description": "This story is about a man seeking revenge for the murder of his father. Your name is Park Ji Woo and you have become a successful entrepreneur in the states. You come back to South Korea under the alias of Daniel Park and your goal is to destroy X Company.",
+      "description": "Your name is Park Ji Woo and you have become a successful entrepreneur in the states. \n You have just found out that your father was killed in your hometown in Korea. \n You plan to return under the alias of Daniel Park and your goal is to investigate the murder. \n Before you leave for the airport you need to grab the things you need.",
       "ending": false,
       "items": [
         "passport",
