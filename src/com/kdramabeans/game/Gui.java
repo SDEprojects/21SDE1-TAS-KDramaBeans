@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static com.kdramabeans.game.Game.*;
 import static com.kdramabeans.game.Game.music;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Gui {
 
@@ -154,7 +155,7 @@ public class Gui {
         currentScene.setEditable(false);
         statusArea.setLineWrap(true);
         statusArea.setEditable(false);
-        statusArea.setText("Commands:\n\n" + showHelp());
+        statusArea.setText("To see commands please click on the [?] - Help button on top right corner!\n");
 
         // set up textField for userInput
         mainTextField = new JTextField();
@@ -251,7 +252,8 @@ public class Gui {
                     inventoryArea.setText("Inventory is Empty!");
                     statusArea.setText("");
                 });
-                put(helpButton, () -> statusArea.setText("These are your commands:\n\n" + showHelp()));
+                // put(helpButton, () -> statusArea.setText("These are your commands:\n\n" + showHelp()));
+                put(helpButton, () -> showMessageDialog(mainTextArea, "Commands: \n" + showHelp()));
                 put(startButton, () -> {
                     startButton.getParent().remove(startButton);
                     createGameScreen();
