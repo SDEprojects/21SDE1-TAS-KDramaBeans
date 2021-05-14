@@ -1,9 +1,9 @@
 {
-  "story" : {
+  "story": {
     "intro": {
       "description": "This story is about a man seeking revenge for the murder of his father. Your name is Park Ji Woo and you have become a successful entrepreneur in the states. You come back to South Korea under the alias of Daniel Park and your goal is to destroy X Company.",
       "ending": false,
-      "items": ["passport", "wallet", "luggage"],
+      "items": ["passport", "wallet", "luggage", "map"],
       "hidden": [],
       "name": "intro"
     },
@@ -106,8 +106,7 @@
       "name": "ceoScene"
     }
   },
-
-  "items" : {
+  "items": {
     "passport": {
       "position": "Your [passport] is laying on your bed.",
       "description": "This is the key for you to get your revenge",
@@ -125,6 +124,13 @@
       "position": "Your [luggage] is finally packed and ready by the door.",
       "description": "You packed up some clothes and ready to go",
       "option": {}
+    },
+    "map": {
+      "description": "You have not seen your daughter for a while",
+      "option": {
+        "description": "Meet with her",
+        "nextScene": "scene5"
+      }
     },
     "voice recorder": {
       "position": "voice recorder",
@@ -325,22 +331,30 @@
       }
     }
   },
-
-  "randomEvents" : {
+  "randomEvents": {
     "event0": {
       "description": "You walked by a flower shop, and wonder if you should buy some flower for Lee Ji Eun.",
       "ending": false,
-      "items": ["rose", "daisy"]
+      "items": [
+        "rose",
+        "daisy"
+      ]
     },
     "event1": {
       "description": "cryptocurrency price is at all time low, do you want to buy in?",
       "ending": false,
-      "items": ["bitcoin", "dogecoin"]
+      "items": [
+        "bitcoin",
+        "dogecoin"
+      ]
     },
     "event2": {
       "description": "You are alone walking down the street, all of sudden, you are jumped by a beefy looking guy",
       "ending": false,
-      "items": ["bike", "stick"]
+      "items": [
+        "bike",
+        "stick"
+      ]
     }
   }
 }
