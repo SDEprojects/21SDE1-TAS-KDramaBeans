@@ -19,15 +19,17 @@ public class Gui {
 
     private JFrame window;
     private JPanel titleNamePanel, buttonPanel, mainTextPanel, generalButtonPanel;
-    private JLabel titleNameLabel, gifLabel, sceneLabel;
+    public static JLabel sceneLabel;
+    private JLabel titleNameLabel, gifLabel;
     private JButton startButton, nextButton, enterButton, restartButton, quitButton, helpButton, musicButton;
-    public static JTextArea mainTextArea, statusArea, inventoryArea;
+    public static JTextArea mainTextArea, statusArea, inventoryArea, currentScene;
     public static JTextField mainTextField;
     private Container container;
-    private static final Font titleFont = new Font("Times New Roman", Font.BOLD, 30);
+    private static final Font titleFont = new Font("Times New Roman", Font.BOLD, 45);
     private static final Font normalFont = new Font("Times New Roman", Font.PLAIN, 15);
     private TextFieldHandler textHandler = new TextFieldHandler();
     public static final Color SKY_ICE = new Color(206, 231, 243);
+    public static final Color HOT_ORANGE = new Color(255, 160, 0);
 
     /*
       ctor that initializes the home page of the game
@@ -51,7 +53,7 @@ public class Gui {
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(SKY_ICE);
         titleNameLabel = new JLabel("You are my Destiny!");
-        titleNameLabel.setForeground(Color.black);
+        titleNameLabel.setForeground(HOT_ORANGE);
         titleNameLabel.setFont(titleFont);
 
         try {
@@ -94,9 +96,17 @@ public class Gui {
         mainTextPanel.setBounds(100, 250, 600, 350);
         mainTextPanel.setBackground(Color.white);
 
+        //sets up Scene Title
+        currentScene = new JTextArea("INTRO");
+        currentScene.setBounds(100,0,300,50);
+        currentScene.setEditable(false);
+        currentScene.setBackground(SKY_ICE);
+        currentScene.setFont(titleFont);
+        currentScene.setForeground(HOT_ORANGE);
+        container.add(currentScene);
         //sets up scene image
         try {
-            Icon scenePng = new ImageIcon(getClass().getResource("/random.jpg"));
+            Icon scenePng = new ImageIcon(getClass().getResource("/intro.jpg"));
             sceneLabel = new JLabel(scenePng);
             sceneLabel.setBorder(new LineBorder(Color.black));
             sceneLabel.setBounds(0, 50, 800, 200);
@@ -111,6 +121,8 @@ public class Gui {
         mainTextArea.setBackground(Color.white);
         mainTextArea.setForeground(Color.black);
         mainTextArea.setFont(normalFont);
+
+        mainTextArea.setEditable(false);
         mainTextArea.setLineWrap(true);
 
         //sets up inventory area
@@ -139,7 +151,9 @@ public class Gui {
         statusArea.setBackground(Color.white);
         statusArea.setForeground(Color.black);
         statusArea.setFont(normalFont);
+        currentScene.setEditable(false);
         statusArea.setLineWrap(true);
+        statusArea.setEditable(false);
         statusArea.setText("Commands:\n\n" + showHelp());
 
         // set up textField for userInput
@@ -191,6 +205,7 @@ public class Gui {
         musicButton.setBorderPainted(false);
 
         generalButtonPanel.setBounds(0, -10, 1300, 60);
+        generalButtonPanel.setBackground(SKY_ICE);
         generalButtonPanel.add(restartButton);
         generalButtonPanel.add(musicButton);
         generalButtonPanel.add(helpButton);
@@ -232,7 +247,6 @@ public class Gui {
                     System.out.println("Restarting...");
                     story.restartGame();
                     player.clearItems();
-
                     mainTextArea.setText(printStatus());
                     inventoryArea.setText("Inventory is Empty!");
                     statusArea.setText("");

@@ -2,6 +2,7 @@ package com.kdramabeans.game;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,14 +33,22 @@ public class Game {
         status += (story.printStory() + "\n" + story.printItems() + "\n" + story.printOptions());
         return status;
     }
+    public static Icon getJPG(String jpgName){
+        //sets up scene image
+        Icon foundJPG = null;
+        try {
+            foundJPG =  new ImageIcon(Game.class.getResource("/"+jpgName+".jpg"));
+        }catch(Exception e){
+            System.out.println("Failed to load: "+jpgName+".jpg");
+            e.printStackTrace();
+        }
+        return foundJPG;
+    }
 
     public static void playGame() {
         try {
             String[] input = StringUtils.split(mainTextField.getText().toLowerCase().trim(), " ", 2);
-            System.out.println("THIS IS THE INPUT: " + mainTextField.getText());
-            for (String s : input) {
-                System.out.println(s);
-            }
+            System.out.println("PLAYER INPUT: " + mainTextField.getText());
             final String[] Result = new String[1];
             Map<String, Runnable> allActions = new HashMap<>();
 
@@ -114,6 +123,11 @@ public class Game {
             mainTextArea.setText(printStatus());
             inventoryArea.setText(player.printGrabbedItems() + "\n" + player.printEvidence());
             mainTextField.setText("");
+
+            String sceneName = story.getScene().get("name").asText();
+            currentScene.setText(sceneName.toUpperCase());
+            sceneLabel.setIcon(getJPG(sceneName));
+
         } catch (ArrayIndexOutOfBoundsException exception) {
             statusArea.setText("Error: you didn't enter your move correctly");
         }
