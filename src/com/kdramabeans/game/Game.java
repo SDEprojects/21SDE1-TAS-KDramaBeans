@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.kdramabeans.game.Gui.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Game {
 
@@ -119,7 +120,7 @@ public class Game {
                 }
 
             }).run();
-            statusArea.setText(Result[0]);
+            showMessageDialog(statusArea, Result[0]);
             mainTextArea.setText(printStatus());
             inventoryArea.setText(player.printGrabbedItems() + "\n" + player.printEvidence());
             mainTextField.setText("");

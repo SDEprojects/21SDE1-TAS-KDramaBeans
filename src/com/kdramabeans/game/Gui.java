@@ -253,7 +253,7 @@ public class Gui {
                     statusArea.setText("");
                 });
                 // put(helpButton, () -> statusArea.setText("These are your commands:\n\n" + showHelp()));
-                put(helpButton, () -> showMessageDialog(mainTextArea, "Commands: \n" + showHelp()));
+                put(helpButton, () -> showMessageDialog(statusArea, showHelp()));
                 put(startButton, () -> {
                     startButton.getParent().remove(startButton);
                     createGameScreen();
@@ -273,7 +273,7 @@ public class Gui {
     }
 
     private String showHelp() {
-        return "[examine,look,see,view] [Item] - to get the item description.\n" +
+        return "Commands:\n\n[examine,look,see,view] [Item] - to get the item description.\n" +
                 "[grab,get,acquire,attain,snatch] [Item] - to add item to your inventory.\n" +
                 "[drop,remove] [Item] - to drop item from your inventory.\n" +
                 "[use,throw] [Item] - to use item in a scene.\n" +
