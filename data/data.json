@@ -3,79 +3,121 @@
     "intro": {
       "description": "This story is about a man seeking revenge for the murder of his father. Your name is Park Ji Woo and you have become a successful entrepreneur in the states. You come back to South Korea under the alias of Daniel Park and your goal is to destroy X Company.",
       "ending": false,
-      "items": ["passport", "wallet", "luggage", "map"],
+      "items": [
+        "passport",
+        "wallet",
+        "luggage",
+        "map"
+      ],
       "hidden": [],
       "name": "intro"
     },
     "scene1": {
       "description": "Park Ji Woo's father, Park Ji Sung is driving his boss, Lee Jin Wook to work. He is suddenly asked to pull over as his boss receives an urgent phone call. His boss looks frantic.",
       "ending": false,
-      "items": ["voice recorder", "phone", "sun glasses"],
+      "items": [
+        "voice recorder",
+        "phone",
+        "sun glasses"
+      ],
       "hidden": [],
-      "name": "scene1"
+      "name": "phone-call"
     },
     "scene2": {
       "description": "The next day, your father leaves work to pick you up from school. Another car crashed into your dad's car, right in the front of the school gate. You come out of school only to find your dad is dead, and no other vehicle in sight. The only thing left besides your dad's body is his favorite watch and a picture of you two. Today, you became an orphan, you have no other family members.",
       "ending": false,
-      "items": ["watch", "will", "picture"],
-      "hidden": ["evidence 1"],
-      "name": "scene2"
+      "items": [
+        "watch",
+        "will",
+        "picture"
+      ],
+      "hidden": [
+        "evidence 1"
+      ],
+      "name": "tragedy"
     },
     "scene3": {
       "description": "You have been adopted by an American family and moved to New York. You attend and graduate at the top of your class from Yale University. You go on to become a successful entrepreneur and are famous all throughout the world. Little do people know, your only goal in life is to get back at the person who murdered your father.",
       "ending": false,
-      "items": ["ticket", "business card"],
-      "hidden": ["evidence 2"],
-      "name": "scene3"
+      "items": [
+        "ticket",
+        "business card"
+      ],
+      "hidden": [
+        "evidence 2"
+      ],
+      "name": "vengeance"
     },
     "scene4": {
       "description": "You have done your research about X Company, and gathered leads on how to take the company down. You fly to Korea with the alias of Daniel Park.",
       "ending": false,
-      "items": ["coffee", "tea", "beer"],
+      "items": [
+        "coffee",
+        "tea",
+        "beer"
+      ],
       "hidden": [],
-      "name": "scene4"
+      "name": "investigation"
     },
     "scene5": {
       "description": "You meet the daughter, Lee Ji Eun. She is caught off guard by your elegance and immediately starts a conversation with you.",
       "ending": false,
-      "items": ["window seat", "the booth"],
-      "hidden": ["evidence 3"],
-      "name": "scene5"
+      "items": [
+        "window seat",
+        "the booth"
+      ],
+      "hidden": [
+        "evidence 3"
+      ],
+      "name": "surprise"
     },
     "scene6": {
       "description": "You meet the CEO of Company X, and inform him your company would like to help promote the sales of RDX-90 in the United States.",
       "ending": false,
-      "items": ["green tea", "solomon's tea"],
-      "hidden": ["evidence 5"],
-      "name": "scene6"
+      "items": [
+        "green tea",
+        "solomon's tea"
+      ],
+      "hidden": [
+        "evidence 5"
+      ],
+      "name": "meeting"
     },
     "scene7": {
       "description": "You meet a board member of Company X, and he was quite happy about RDX-90 possibly going on sale in the United States",
       "ending": false,
-      "items": ["ipa", "truly"],
-      "hidden": ["evidence 4"],
-      "name": "scene7"
+      "items": [
+        "ipa",
+        "truly"
+      ],
+      "hidden": [
+        "evidence 4"
+      ],
+      "name": "deal"
     },
     "scene8": {
       "description": "You've collected enough information about the safety concerns of RDX-90 along with the plagiarized clinical trials. You meet an American reporter in a cafe shop to transfer all the information you have on Company X. As soon as you are about to give the report, Lee Ji Eun, who has been tailing you, interrupts your conversation.",
       "ending": false,
-      "items": ["kimchi", "soju"],
+      "items": [
+        "kimchi",
+        "soju"
+      ],
       "hidden": [],
-      "name": "scene8"
+      "name": "interruption"
     },
     "result1": {
       "description": "Congratulations, you have reached your goal of life! You take down the company, you reveal your identity to Chairman Lee who is shocked that you have come this far. He asks for forgiveness and for you to spare his life. He is sentenced to 15 years in jail for corruption and murder for your father's death.",
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "result1"
+      "name": "lifetime-goal"
     },
     "result2": {
       "description": "You develop feelings for Lee Ji Eun and your relationship takes off. You reveal your identity to her and she accepts you for who you are and what you have been through. You still reveal the corrupt deeds of Company X and the Chairman goes to jail. You take over as the CEO and reform the company and it becomes a global brand after the successful promotion of RDX-90.",
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "result2"
+      "name": "love"
     },
     "candyCrush": {
       "description": "You ran out of time and couldn't beat level 100. You open the window a little bit to take out your frustration. The chairman being frantic feels like you were eavesdropping and gets suspicious.",
@@ -108,7 +150,7 @@
   },
   "items": {
     "passport": {
-      "position": "Your [passport] is laying on your bed.",
+      "position": "[passport] is laying on your bed.",
       "description": "This is the key for you to get your revenge",
       "option": {
         "description": "Fly to Korea",
@@ -116,16 +158,17 @@
       }
     },
     "wallet": {
-      "position": "Your [wallet] is on the table.",
+      "position": "[wallet] is on the table.",
       "description": "You might need some money",
       "option": {}
     },
     "luggage": {
-      "position": "Your [luggage] is finally packed and ready by the door.",
+      "position": "[luggage] is finally packed and ready by the door.",
       "description": "You packed up some clothes and ready to go",
       "option": {}
     },
     "map": {
+      "position": "[map] is on the floor",
       "description": "You have not seen your daughter for a while",
       "option": {
         "description": "Meet with her",
@@ -133,7 +176,7 @@
       }
     },
     "voice recorder": {
-      "position": "voice recorder",
+      "position": "[voice recorder] is on the rear seat",
       "description": "Your old-school voice recorder. There's still some room left to record something...",
       "option": {
         "description": "Eavesdrop on the conversation.",
@@ -141,7 +184,7 @@
       }
     },
     "phone": {
-      "position": "phone",
+      "position": "[phone] is in your pocket",
       "description": "There's only Candy Crush on this phone.",
       "option": {
         "description": "Play Candy Crush on your phone while waiting for him to finish.",
@@ -149,12 +192,12 @@
       }
     },
     "sun glasses": {
-      "position": "sun glasses",
+      "position": "[sun glasses] are in the glove box",
       "description": "This would come in handy for drivers",
       "option": {}
     },
     "watch": {
-      "position": "watch",
+      "position": "[watch] is in your father's wrist",
       "description": "You find an odd microchip taped on the backside of the watch",
       "option": {
         "description": "Inspect your dad's favorite watch",
@@ -162,7 +205,7 @@
       }
     },
     "picture": {
-      "position": "picture",
+      "position": "[picture] is in your father's jacket pocket",
       "description": "It's a portrait of you and your father",
       "option": {
         "description": "Continue to mourn for your father's death",
@@ -170,12 +213,12 @@
       }
     },
     "will": {
-      "position": "will",
+      "position": "[will] is at your father's lawyer",
       "description": "Looks like you are the beneficiary for his insurance policy",
       "option": {}
     },
     "ticket": {
-      "position": "ticket",
+      "position": "[ticket] is in your email",
       "description": "It's the opening ceremony ticket to the 2021 Tokyo Olympic Games!",
       "option": {
         "description": "Fly first class to Tokyo to watch the 2021 Olympics",
@@ -183,7 +226,7 @@
       }
     },
     "business card": {
-      "position": "business card",
+      "position": "[business card] you got from a friend",
       "description": "It's for a Private Investigator",
       "option": {
         "description": "Hire a private investigator",
@@ -191,7 +234,7 @@
       }
     },
     "coffee": {
-      "position": "coffee",
+      "position": "[coffee] order to barista",
       "description": "Your cup is low. Maybe go grab some more?",
       "option": {
         "description": "Meet the CEO's daughter for coffee",
@@ -199,7 +242,7 @@
       }
     },
     "tea": {
-      "position": "tea",
+      "position": "[tea] is on the table",
       "description": "Your cup is low. Maybe go grab some more?",
       "option": {
         "description": "Meet with the CEO",
@@ -207,7 +250,7 @@
       }
     },
     "beer": {
-      "position": "beer",
+      "position": "[beer] order from bartender",
       "description": "Your cup is low. Maybe go grab some more?",
       "option": {
         "description": "Talk to Company X's board members",
@@ -282,7 +325,7 @@
       "position": "evidence",
       "description": "The private investigator concludes that the top suspect for your father's murder is Company X's CEO."
     },
-    "rose":{
+    "rose": {
       "position": "A [rose] bush is growing in that garden",
       "description": "Roses are most commonly associated with love and romance.",
       "option": {
