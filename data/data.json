@@ -131,21 +131,21 @@
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "mournScene"
+      "name": "mourn"
     },
     "olympicScene": {
       "description": "Korea takes 1st place in all competitions! All the males are exempt from their military service.",
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "olympicScene"
+      "name": "olympics"
     },
     "ceoScene": {
       "description": "You notice a lot of the information presented doesn't make any sense. You see that this document can be a liability to the company and its RDX-90 product promotion.",
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "ceoScene"
+      "name": "ceo"
     }
   },
   "items": {
