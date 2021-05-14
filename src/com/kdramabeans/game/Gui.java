@@ -35,7 +35,7 @@ public class Gui {
     /*
       ctor that initializes the home page of the game
      */
-    public Gui() throws Exception {
+    public Gui() {
         item = new DataParser();
         window = new JFrame();
         titleNamePanel = new JPanel();
@@ -248,6 +248,9 @@ public class Gui {
                     System.out.println("Restarting...");
                     story.restartGame();
                     player.clearItems();
+
+                    currentScene.setText("INTRO");
+                    sceneLabel.setIcon(getJPG("intro"));
                     mainTextArea.setText(printStatus());
                     inventoryArea.setText("Inventory is Empty!");
                     statusArea.setText("");

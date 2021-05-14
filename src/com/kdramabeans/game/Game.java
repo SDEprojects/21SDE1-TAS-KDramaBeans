@@ -52,7 +52,7 @@ public class Game {
             final String[] Result = new String[1];
             Map<String, Runnable> allActions = new HashMap<>();
 
-            ArrayList<Runnable> runners = new ArrayList<Runnable>() {{
+            ArrayList<Runnable> runners = new ArrayList<>() {{
                 add(() -> {
                     if (story.hasItem(input[1]) || player.hasGrabbedItem(input[1])) {
                         Result[0] = item.getItemDescription(input[1]);
@@ -106,7 +106,8 @@ public class Game {
                     counter[0]++;
                 });
             } catch (Exception except) {
-                System.out.println(except);
+                System.out.println("not a valid verb: or can't find validVerb.csv");
+                except.printStackTrace();
             }
             allActions.getOrDefault(input[0], () -> {
                 int answer = story.getOptions().values().stream().map(obj -> obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim()) + 1;

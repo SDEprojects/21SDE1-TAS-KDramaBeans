@@ -24,7 +24,7 @@ public class Story {
       gets story information from a .json file, makes it into a JSON object, and then saves the current scene
       to be "intro" and saves the items that are in the scene into a List called "sceneItems"
      */
-    public Story() throws Exception {
+    public Story() {
         dp = new DataParser();
         this.data = dp.getStory();
         this.scene = dp.getStoryIntro();
@@ -98,7 +98,7 @@ public class Story {
 
     // restarts the game - resets scene back to intro and clears all options and items
     public void restartGame() {
-        this.scene = (JsonNode) data.get("intro");
+        this.scene = data.get("intro");
         sceneItems.clear();
         setSceneItems();
         hiddenItems.clear();
@@ -132,9 +132,9 @@ public class Story {
     //check if current scene has the item by comparing to the name of each item
     public boolean hasItem(String itemName) {
         boolean result = false;
-        for (int index = 0; index < sceneItems.size(); index++) {
+        for (String sceneItem : sceneItems) {
             // return sceneItems.contains(itemName);
-            if (sceneItems.get(index).equalsIgnoreCase(itemName)) {
+            if (sceneItem.equalsIgnoreCase(itemName)) {
                 result = true;
             }
         }
@@ -144,8 +144,8 @@ public class Story {
     //check if current scene has hidden item
     public boolean hasHidden(String itemName) {
         boolean result = false;
-        for (int index = 0; index < hiddenItems.size(); index++) {
-            if (hiddenItems.get(index).equalsIgnoreCase(itemName)) {
+        for (String hiddenItem : hiddenItems) {
+            if (hiddenItem.equalsIgnoreCase(itemName)) {
                 result = true;
             }
         }
@@ -157,8 +157,8 @@ public class Story {
         String result = "";
         if (!getEnding()) {
             result += "\nHere are the items you see: ";
-            for (int index = 0; index < sceneItems.size(); index++) {
-                result += ("\n" + dp.getItemPosition(sceneItems.get(index)));
+            for (String sceneItem : sceneItems) {
+                result += ("\n" + dp.getItemPosition(sceneItem));
             }
         }
         return result;
