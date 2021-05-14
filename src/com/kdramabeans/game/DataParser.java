@@ -15,6 +15,7 @@ public class DataParser {
     static String ITEMS_NODE = "items";
     static String RANDOMEVENTS_NODE = "randomEvents";
     static String DESCRIPTION_NODE = "description";
+    static String POSITION_NODE = "position";
     static String ITEM_OPTION = "option";
     static String HIDDEN_NODE = "hidden";
 
@@ -35,6 +36,10 @@ public class DataParser {
     public String getItemDescription(String itemName) {
         String itemD = root.path(ITEMS_NODE).path(itemName).path(DESCRIPTION_NODE).asText();
         return StringUtils.capitalize(itemName) + ": " + itemD;
+    }
+
+    public String getItemPosition(String itemName) {
+        return root.path(ITEMS_NODE).path(itemName).path(POSITION_NODE).asText();
     }
 
     public List<String> getItemNames() {

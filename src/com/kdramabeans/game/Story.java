@@ -158,7 +158,7 @@ public class Story {
         if (!getEnding()) {
             result += "\nHere are the items you see: ";
             for (int index = 0; index < sceneItems.size(); index++) {
-                result += ("\n" + sceneItems.get(index));
+                result += ("\n" + dp.getItemPosition(sceneItems.get(index)));
             }
         }
         return result;
@@ -172,9 +172,7 @@ public class Story {
     // iterates over story.json and depending on the item picked, will give you certain options
     public String printOptions() {
         String result = "";
-        System.out.println(options);
         if (options.size() > 0) {
-            System.out.println(options);
             Iterator<Map.Entry<String, Map>> itr1 = options.entrySet().iterator();
             result += "\nHere are your options: ";
             while (itr1.hasNext()) {
@@ -217,5 +215,8 @@ public class Story {
 
     public boolean getEnding() {
         return scene.get("ending").asBoolean();
+    }
+    public JsonNode getScene(){
+        return this.scene;
     }
 }
