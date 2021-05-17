@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.kdramabeans.game.Gui.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Game {
 
@@ -19,6 +20,7 @@ public class Game {
     public static Story story;
     public static DataParser item;
     public static BGM music;
+    public static BGM soundfx;
 
     public static Map<String, String> evidenceMap = new HashMap<>() {{
         put("watch", "evidence 1");
@@ -44,6 +46,17 @@ public class Game {
         }
         return foundJPG;
     }
+    public static Icon getGIF(String gifName){
+        //sets up scene image
+        Icon foundGIF = null;
+        try {
+            foundGIF =  new ImageIcon(Game.class.getResource("/"+gifName+".gif"));
+        }catch(Exception e){
+            System.out.println("Failed to load: "+gifName+".gif");
+            e.printStackTrace();
+        }
+        return foundGIF;
+    }
 
     public static void playGame() {
         try {
@@ -56,8 +69,10 @@ public class Game {
                 add(() -> {
                     if (story.hasItem(input[1]) || player.hasGrabbedItem(input[1])) {
                         Result[0] = item.getItemDescription(input[1]);
+                        showMessageDialog(statusArea, "",Result[0],JOptionPane.INFORMATION_MESSAGE,getGIF(input[1].replaceAll(" ","_")));
                     } else {
                         Result[0] = "You cannot examine that.\n";
+                        showMessageDialog(statusArea, Result[0]);
                     }
                 });
                 add(() -> {
@@ -65,9 +80,10 @@ public class Game {
                         if (player.grabItem(input[1])) {
                             story.setOptions(input[1]);
                             Result[0] = "You have grabbed " + input[1];
+                            showMessageDialog(statusArea, "",Result[0],JOptionPane.INFORMATION_MESSAGE,getGIF(input[1].replaceAll(" ","_")));
                         } else {
-
                             Result[0] = "You have too many items! Try dropping one if you really need to grab " + input[1];
+                            showMessageDialog(statusArea, Result[0]);
                         }
                     } else {
                         Result[0] = "You cannot grab that.\n";
@@ -83,20 +99,23 @@ public class Game {
                         Result[0] = "You don't have this item in your inventory or your item does not work here";
                     }
                 });
-                add(() -> Result[0] = player.dropItem(input[1]));
+                add(() -> {
+                    Result[0] = player.dropItem(input[1]);
+                    showMessageDialog(statusArea, "",Result[0],JOptionPane.INFORMATION_MESSAGE,getGIF(input[1]));
+                });
                 add(() -> {
                     if (story.getOptions().containsKey(input[1])) {
                         story.setCurrentOption(input[1]);
                         story.nextScene(true);
                         Result[0] = "You chose option: " + input[1];
                     } else {
-                        Result[0] = "Use: [choose,go,move,select] [number]\n";
+                        Result[0] = "Use: [choose,move,select] [number]\n";
                     }
                 });
             }};
             try {
-                InputStream in = Game.class.getResourceAsStream("/validVerbs.csv");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                InputStream validVerbs = Game.class.getResourceAsStream("/validVerbs.csv");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(validVerbs));
                 final int[] counter = {0};
                 reader.lines().forEachOrdered(synonyms -> {
                     String[] verbs = synonyms.split(",");
@@ -112,22 +131,36 @@ public class Game {
             allActions.getOrDefault(input[0], () -> {
                 int answer = story.getOptions().values().stream().map(obj -> obj.get("description").toString().toLowerCase()).collect(Collectors.toList()).indexOf(mainTextField.getText().toLowerCase().trim()) + 1;
                 if (answer != 0) {
+                    if(mainTextField.getText().toLowerCase().trim().equals("go to academy")){
+                        player.dropItem("wallet");
+                    }
+                    if(mainTextField.getText().toLowerCase().trim().equals("work out")){
+                        Player.increaseExperience(100);
+                    }
+                    if(mainTextField.getText().toLowerCase().trim()
+                            .substring(0,6).equals("accuse")){
+                        Player.increaseExperience(100);
+                        player.clearItems();
+                    }
+                    if(mainTextField.getText().toLowerCase().trim().equals("eat snack")){
+                        Player.increaseHappiness(20);
+                    }
                     story.setCurrentOption("" + answer);
                     story.nextScene(true);
-                    Result[0] = "";
+                    Result[0] = mainTextField.getText();
+                    showMessageDialog(statusArea, "",Result[0],JOptionPane.INFORMATION_MESSAGE,getGIF(Result[0].toLowerCase().replaceAll(" ","_")));
                 } else {
                     Result[0] = "Not a command\n";
                 }
 
             }).run();
-            statusArea.setText(Result[0]);
             mainTextArea.setText(printStatus());
             inventoryArea.setText(player.printGrabbedItems() + "\n" + player.printEvidence());
             mainTextField.setText("");
 
             String sceneName = story.getScene().get("name").asText();
             currentScene.setText(sceneName.toUpperCase());
-            sceneLabel.setIcon(getJPG(sceneName));
+            sceneLabel.setIcon(getJPG(sceneName.replaceAll(" ","_")));
 
         } catch (ArrayIndexOutOfBoundsException exception) {
             statusArea.setText("Error: you didn't enter your move correctly");

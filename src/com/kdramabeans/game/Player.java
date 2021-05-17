@@ -83,12 +83,20 @@ public class Player {
         Player.happiness = happiness;
     }
 
+    public static void increaseHappiness(int experience) {
+        Player.experience += experience;
+    }
+
     public static int getExperience() {
         return experience;
     }
 
     public static void setExperience(int experience) {
         Player.experience = experience;
+    }
+
+    public static void increaseExperience(int experience) {
+        Player.experience += experience;
     }
     public static boolean hasExperienceGreaterThan(int exp){
         return getExperience()>exp;

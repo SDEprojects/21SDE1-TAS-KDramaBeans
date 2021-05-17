@@ -81,7 +81,7 @@ public class DataParser {
     }
 
     public JsonNode getStoryIntro() {
-        return root.path(STORY_NODE).path("intro");
+        return root.path(STORY_NODE).path("home");
     }
 
     public JsonNode getStory() {

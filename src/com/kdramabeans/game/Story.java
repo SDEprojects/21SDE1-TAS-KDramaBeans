@@ -98,7 +98,7 @@ public class Story {
 
     // restarts the game - resets scene back to intro and clears all options and items
     public void restartGame() {
-        this.scene = data.get("intro");
+        this.scene = data.get("home");
         sceneItems.clear();
         setSceneItems();
         hiddenItems.clear();
