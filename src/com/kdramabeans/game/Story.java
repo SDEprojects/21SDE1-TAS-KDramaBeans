@@ -24,16 +24,12 @@ public class Story {
       gets story information from a .json file, makes it into a JSON object, and then saves the current scene
       to be "intro" and saves the items that are in the scene into a List called "sceneItems"
      */
-    public Story() throws Exception {
+    public Story() {
         dp = new DataParser();
         this.data = dp.getStory();
         this.scene = dp.getStoryIntro();
         setSceneItems();
     }
-
-    /*
-        methods/functions
-     */
 
     //brings user to the next scene by resetting the scene, the items in the scene, and clearing their options
     public void nextScene(boolean isGUI) {
@@ -102,7 +98,7 @@ public class Story {
 
     // restarts the game - resets scene back to intro and clears all options and items
     public void restartGame() {
-        this.scene = (JsonNode) data.get("intro");
+        this.scene = data.get("home");
         sceneItems.clear();
         setSceneItems();
         hiddenItems.clear();
@@ -136,9 +132,9 @@ public class Story {
     //check if current scene has the item by comparing to the name of each item
     public boolean hasItem(String itemName) {
         boolean result = false;
-        for (int index = 0; index < sceneItems.size(); index++) {
+        for (String sceneItem : sceneItems) {
             // return sceneItems.contains(itemName);
-            if (sceneItems.get(index).equalsIgnoreCase(itemName)) {
+            if (sceneItem.equalsIgnoreCase(itemName)) {
                 result = true;
             }
         }
@@ -148,8 +144,8 @@ public class Story {
     //check if current scene has hidden item
     public boolean hasHidden(String itemName) {
         boolean result = false;
-        for (int index = 0; index < hiddenItems.size(); index++) {
-            if (hiddenItems.get(index).equalsIgnoreCase(itemName)) {
+        for (String hiddenItem : hiddenItems) {
+            if (hiddenItem.equalsIgnoreCase(itemName)) {
                 result = true;
             }
         }
@@ -161,8 +157,8 @@ public class Story {
         String result = "";
         if (!getEnding()) {
             result += "\nHere are the items you see: ";
-            for (int index = 0; index < sceneItems.size(); index++) {
-                result += ("\n" + sceneItems.get(index));
+            for (String sceneItem : sceneItems) {
+                result += ("\n" + dp.getItemPosition(sceneItem));
             }
         }
         return result;
@@ -176,9 +172,7 @@ public class Story {
     // iterates over story.json and depending on the item picked, will give you certain options
     public String printOptions() {
         String result = "";
-        System.out.println(options);
         if (options.size() > 0) {
-            System.out.println(options);
             Iterator<Map.Entry<String, Map>> itr1 = options.entrySet().iterator();
             result += "\nHere are your options: ";
             while (itr1.hasNext()) {
@@ -209,7 +203,7 @@ public class Story {
     public void setOptions(String item) {
         String key = Integer.toString(options.size() + 1);
 
-        if(sceneItems.contains(item.toLowerCase()) && !dp.getItemOption(item).isEmpty()) {
+        if (sceneItems.contains(item.toLowerCase()) && !dp.getItemOption(item).isEmpty()) {
             options.put(key, dp.getItemOption(item));
         }
         sceneItems.remove(item);
@@ -222,20 +216,7 @@ public class Story {
     public boolean getEnding() {
         return scene.get("ending").asBoolean();
     }
-
-    public boolean isRestart() {
-        return isRestart;
-    }
-
-    public void setRestart(boolean restart) {
-        isRestart = restart;
-    }
-
-    public void setEventTrigger(boolean eventTrigger) {
-        this.eventTrigger = eventTrigger;
-    }
-
-    public boolean isAtEnd() {
-        return isAtEnd;
+    public JsonNode getScene(){
+        return this.scene;
     }
 }

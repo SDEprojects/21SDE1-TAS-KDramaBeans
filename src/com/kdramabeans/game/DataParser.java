@@ -15,6 +15,7 @@ public class DataParser {
     static String ITEMS_NODE = "items";
     static String RANDOMEVENTS_NODE = "randomEvents";
     static String DESCRIPTION_NODE = "description";
+    static String POSITION_NODE = "position";
     static String ITEM_OPTION = "option";
     static String HIDDEN_NODE = "hidden";
 
@@ -37,6 +38,10 @@ public class DataParser {
         return StringUtils.capitalize(itemName) + ": " + itemD;
     }
 
+    public String getItemPosition(String itemName) {
+        return root.path(ITEMS_NODE).path(itemName).path(POSITION_NODE).asText();
+    }
+
     public List<String> getItemNames() {
         List<String> result = new ArrayList<>();
         root.path(ITEMS_NODE).fieldNames().forEachRemaining(result::add);
@@ -55,7 +60,7 @@ public class DataParser {
     public List<String> getSceneHidden(JsonNode scene) {
         List<String> result = new ArrayList<>();
         JsonNode arrNode = scene.path(HIDDEN_NODE);
-        for(JsonNode objNode : arrNode) {
+        for (JsonNode objNode : arrNode) {
             result.add(objNode.asText());
         }
         return result;
@@ -63,8 +68,8 @@ public class DataParser {
 
     public Map getItemOption(String itemName) {
         JsonNode jsonNode = root.path(ITEMS_NODE).path(itemName).path(ITEM_OPTION);
-        Map<String, Object> result = mapper.convertValue(jsonNode, new TypeReference<Map<String, Object>>() {});
-        return result;
+        return mapper.<Map<String, Object>>convertValue(jsonNode, new TypeReference<>() {
+        });
     }
 
     public JsonNode getRandomEvents() {
@@ -76,7 +81,7 @@ public class DataParser {
     }
 
     public JsonNode getStoryIntro() {
-        return root.path(STORY_NODE).path("intro");
+        return root.path(STORY_NODE).path("home");
     }
 
     public JsonNode getStory() {
