@@ -68,9 +68,8 @@ public class DataParser {
 
     public Map getItemOption(String itemName) {
         JsonNode jsonNode = root.path(ITEMS_NODE).path(itemName).path(ITEM_OPTION);
-        Map<String, Object> result = mapper.convertValue(jsonNode, new TypeReference<Map<String, Object>>() {
+        return mapper.<Map<String, Object>>convertValue(jsonNode, new TypeReference<>() {
         });
-        return result;
     }
 
     public JsonNode getRandomEvents() {
@@ -82,7 +81,7 @@ public class DataParser {
     }
 
     public JsonNode getStoryIntro() {
-        return root.path(STORY_NODE).path("intro");
+        return root.path(STORY_NODE).path("home");
     }
 
     public JsonNode getStory() {

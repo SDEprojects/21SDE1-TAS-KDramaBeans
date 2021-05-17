@@ -8,18 +8,22 @@ public class BGM extends Thread {
 
     public Clip clip;
     public String song; // .wav files
+    public boolean isMusic;
+    public static boolean muted = false;
 
 
-    public BGM(String song) {
+    public BGM(String song,boolean isMusic) {
+        this.isMusic = isMusic;
         this.song = song;
-        this.start();
     }
 
     public void run() {
         try {
             clip = AudioSystem.getClip();
             clip.open(createAudioStream(song));
-            clip.start();
+            if(isMusic){
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
         } catch (Exception e) {
             Thread.currentThread().interrupt();
         }
@@ -43,4 +47,13 @@ public class BGM extends Thread {
         URL url = BGM.class.getResource("/" + song);
         return AudioSystem.getAudioInputStream(url);
     }
+
+    public static void mute(){
+        muted = !muted;
+    }
+
+    public static boolean isMuted(){
+        return muted;
+    }
+
 }
