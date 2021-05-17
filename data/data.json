@@ -1,7 +1,7 @@
 {
   "story": {
     "home": {
-      "description": "Your name is Park Ji Woo and you have become a successful entrepreneur in the states. \nYou have just found out that your father was killed in your hometown in Korea. \nYou plan to return under the alias of Daniel Park and your goal is to investigate the murder. \nBefore you leave for the airport you need to grab the things you need.",
+      "description": "Your name is Park Ji Woo and you have become a successful entrepreneur in the states. \n You have just found out that your father was killed in your hometown in Korea. \n You plan to return under the alias of Daniel Park and your goal is to investigate the murder. \n Before you leave for the airport you need to grab the things you need.",
       "ending": false,
       "items": [
         "passport",
@@ -13,7 +13,7 @@
       "name": "home"
     },
     "scene1": {
-      "description": "Park Ji Woo's father, Park Ji Sung is driving his boss, Lee Jin Wook to work. He is suddenly asked to pull over as his boss receives an urgent phone call. His boss looks frantic.",
+      "description": "You arrive at your father's home and see the items from your father's job as Ji Sung's driver.",
       "ending": false,
       "items": [
         "voice recorder",
@@ -145,21 +145,21 @@
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "mourn"
+      "name": "mournScene"
     },
     "olympicScene": {
       "description": "Korea takes 1st place in all competitions! All the males are exempt from their military service.",
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "olympics"
+      "name": "olympicScene"
     },
     "ceoScene": {
       "description": "You notice a lot of the information presented doesn't make any sense. You see that this document can be a liability to the company and its RDX-90 product promotion.",
       "ending": true,
       "items": [],
       "hidden": [],
-      "name": "ceo"
+      "name": "ceoScene"
     }
   },
   "items": {
