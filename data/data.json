@@ -13,7 +13,7 @@
       "name": "home"
     },
     "scene1": {
-      "description": "You arrive at your father's home and see the items from your father's job as Ji Sung's driver.",
+      "description": "Park Ji Woo's father, Park Ji Sung is driving his boss, Lee Jin Wook to work. He is suddenly asked to pull over as his boss receives an urgent phone call. His boss looks frantic.",
       "ending": false,
       "items": [
         "voice recorder",
